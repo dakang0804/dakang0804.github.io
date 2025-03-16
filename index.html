@@ -67,9 +67,10 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            display: flex;
             width: 100%;
+            display: flex;
             justify-content: space-between;
+            align-items: center;
             z-index: 10;
         }
         .nav-button {
@@ -79,6 +80,13 @@
             border: none;
             cursor: pointer;
             transition: color 0.3s;
+            position: absolute;
+        }
+        .nav-button.left {
+            left: 20px;
+        }
+        .nav-button.right {
+            right: 20px;
         }
         .nav-button:hover {
             color: rgba(255, 255, 255, 1);
@@ -89,11 +97,10 @@
             right: 20px;
             text-align: right;
             color: white;
-            font-size: 24px;
+            font-size: 18px;
             z-index: 10;
-        }
-        .categories div {
-            margin-bottom: 5px;
+            display: flex;
+            gap: 20px;
         }
     </style>
 </head>
@@ -120,8 +127,8 @@
     <div class="project-name" id="project-name">Project 1</div>
     
     <div class="navigation">
-        <button class="nav-button" onclick="prevSlide()">⟨</button>
-        <button class="nav-button" onclick="nextSlide()">⟩</button>
+        <button class="nav-button left" onclick="prevSlide()">⟨</button>
+        <button class="nav-button right" onclick="nextSlide()">⟩</button>
     </div>
     
     <script>
@@ -151,3 +158,4 @@
     </script>
 </body>
 </html>
+
