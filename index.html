@@ -28,7 +28,7 @@
             background-size: cover;
             background-position: center;
         }
-        .header, .categories, .project-name {
+        .header, .project-name {
             position: fixed;
             z-index: 10;
             font-family: 'STSong', 'SimSun', serif; /* 确保所有固定元素使用相同字体 */
@@ -38,13 +38,14 @@
             left: 20px;
             display: flex;
             align-items: baseline;
-            width: auto;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 20px;
         }
         .name {
             font-size: 32px;
             font-weight: bold;
             color: white;
-            margin-right: 15px;
         }
         .button {
             font-size: 24px;
@@ -57,7 +58,7 @@
             font-family: inherit;
         }
         .button:hover {
-            color: #0047AB;
+            color: #1F3A93; /* 钴蓝色 */
         }
         .project-name {
             bottom: 50px;
@@ -70,7 +71,7 @@
             transition: color 0.3s;
         }
         .project-name:hover {
-            color: #FF1493;
+            color: #1F3A93; /* 钴蓝色 */
         }
         .navigation {
             position: fixed;
@@ -100,39 +101,24 @@
         .nav-button:hover {
             color: rgba(255, 255, 255, 1);
         }
-        .categories {
-            top: 45px;
-            right: 20px;
-            display: flex;
-            gap: 20px;
-            color: white;
-            font-size: 18px;
-            align-items: baseline;
-        }
-
         /* 移动端优化：确保字体一致，不同设备显示相同 */
         @media (max-width: 768px) {
-            body, html, .header, .categories, .project-name {
+            body, html, .header, .project-name {
                 font-family: 'STSong', 'SimSun', serif !important;
             }
             .header {
                 top: 20px;
                 left: 10px;
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 15px;
             }
             .name {
                 font-size: 28px; /* 让移动端更接近桌面端 */
             }
             .button {
                 font-size: 22px;
-            }
-            .categories {
-                top: 20px;
-                right: 10px;
-                font-size: 16px;
-                flex-direction: column;
-                gap: 10px;
             }
             .project-name {
                 bottom: 40px;
@@ -148,11 +134,6 @@
     <div class="header">
         <div class="name">Dakang Wang</div>
         <button class="button" onclick="window.location.href='about.html'">About me</button>
-    </div>
-    <div class="categories">
-        <div>Photography</div>
-        <div>Grafik Design</div>
-        <div>Sound Design</div>
     </div>
     
     <div class="slider-container" id="slider">
