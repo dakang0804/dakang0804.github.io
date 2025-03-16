@@ -34,7 +34,9 @@
             left: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px;
             z-index: 10;
         }
         .name {
@@ -92,28 +94,22 @@
             color: rgba(255, 255, 255, 1);
         }
         .categories {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            text-align: right;
-            color: white;
-            font-size: 18px;
-            z-index: 10;
             display: flex;
             gap: 20px;
+            color: white;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="name">Dakang Wang</div>
+        <div class="categories">
+            <div>Photography</div>
+            <div>Grafik Design</div>
+            <div>Sound Design</div>
+        </div>
         <button class="button" onclick="window.location.href='about.html'">About me</button>
-    </div>
-    
-    <div class="categories">
-        <div>Photography</div>
-        <div>Grafik Design</div>
-        <div>Sound Design</div>
     </div>
     
     <div class="slider-container" id="slider">
@@ -158,4 +154,3 @@
     </script>
 </body>
 </html>
-
