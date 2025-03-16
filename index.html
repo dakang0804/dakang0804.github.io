@@ -13,7 +13,7 @@
         body, html {
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow: hidden; /* 禁止默认滚动 */
             font-family: 'STSong', 'SimSun', serif;
         }
         .slider-container {
@@ -28,11 +28,12 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
+            position: relative;
         }
         .header, .project-name {
             position: fixed;
             z-index: 10;
-            font-family: 'STSong', 'SimSun', serif; /* 确保所有固定元素使用相同字体 */
+            font-family: 'STSong', 'SimSun', serif;
         }
         .header {
             top: 35px;
@@ -46,12 +47,13 @@
         .name {
             font-size: 32px;
             font-weight: bold;
-            color: white;
         }
         .button {
+            position: absolute;
+            top: 35px;
+            right: 20px;
             font-size: 24px;
             font-weight: bold;
-            color: white;
             border: none;
             background: none;
             cursor: pointer;
@@ -59,20 +61,19 @@
             font-family: inherit;
         }
         .button:hover {
-            color: #1F3A93; /* 钴蓝色 */
+            color: #1F3A93;
         }
         .project-name {
             bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            color: white;
             font-size: 40px;
             font-weight: bold;
             text-align: center;
             transition: color 0.3s;
         }
         .project-name:hover {
-            color: #1F3A93; /* 钴蓝色 */
+            color: #1F3A93;
         }
         .navigation {
             position: fixed;
@@ -102,15 +103,10 @@
         .nav-button:hover {
             color: rgba(255, 255, 255, 1);
         }
-        /* 自动调整文字颜色 */
         .text {
-            mix-blend-mode: difference;
+            color: white;
         }
-        /* 移动端优化：确保字体一致，不同设备显示相同 */
         @media (max-width: 768px) {
-            body, html, .header, .project-name {
-                font-family: 'STSong', 'SimSun', serif !important;
-            }
             .header {
                 top: 20px;
                 left: 10px;
@@ -123,6 +119,8 @@
                 font-size: 28px;
             }
             .button {
+                top: 20px;
+                right: 15px;
                 font-size: 22px;
             }
             .project-name {
@@ -137,7 +135,7 @@
 </head>
 <body>
     <div class="header text">
-        <div class="name">Dakang Wang</div>
+        <div class="name" id="dynamicText">Dakang Wang</div>
         <button class="button" onclick="window.location.href='about.html'">About me</button>
     </div>
     
@@ -161,6 +159,7 @@
         const slides = document.querySelectorAll('.slide');
         const slider = document.getElementById('slider');
         const projectName = document.getElementById('project-name');
+        const dynamicText = document.getElementById('dynamicText');
 
         function updateSlider() {
             slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
@@ -183,3 +182,4 @@
     </script>
 </body>
 </html>
+
