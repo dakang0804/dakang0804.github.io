@@ -125,6 +125,41 @@
             text-decoration: none;
             color: black;
         }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .slide {
+                width: 100vw;
+                height: auto;
+                margin-top: 20px;
+            }
+            .header {
+                top: 10px;
+                left: 10px;
+                padding: 0 10px;
+            }
+            .name, .chinese-name {
+                font-size: 20px;
+            }
+            .project-name {
+                top: 10px;
+                font-size: 28px;
+            }
+            .nav-button {
+                font-size: 50px;
+            }
+            .contact {
+                bottom: 10px;
+                padding: 0 20px;
+            }
+            .contact-link {
+                font-size: 20px;
+            }
+            /* 保持幻灯片容器宽度一致 */
+            .slider-container {
+                width: calc(100vw * 5);
+            }
+        }
     </style>
 </head>
 <body>
