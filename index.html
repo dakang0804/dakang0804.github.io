@@ -31,6 +31,7 @@
         .header, .categories, .project-name {
             position: fixed;
             z-index: 10;
+            font-family: 'STSong', 'SimSun', serif; /* 确保所有固定元素使用相同字体 */
         }
         .header {
             top: 35px;
@@ -38,7 +39,6 @@
             display: flex;
             align-items: baseline;
             width: auto;
-            font-family: 'STSong', 'SimSun', serif;
         }
         .name {
             font-size: 32px;
@@ -108,6 +108,39 @@
             color: white;
             font-size: 18px;
             align-items: baseline;
+        }
+
+        /* 移动端优化：确保字体一致，不同设备显示相同 */
+        @media (max-width: 768px) {
+            body, html, .header, .categories, .project-name {
+                font-family: 'STSong', 'SimSun', serif !important;
+            }
+            .header {
+                top: 20px;
+                left: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .name {
+                font-size: 28px; /* 让移动端更接近桌面端 */
+            }
+            .button {
+                font-size: 22px;
+            }
+            .categories {
+                top: 20px;
+                right: 10px;
+                font-size: 16px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .project-name {
+                top: 80px;
+                font-size: 30px;
+            }
+            .nav-button {
+                font-size: 48px;
+            }
         }
     </style>
 </head>
