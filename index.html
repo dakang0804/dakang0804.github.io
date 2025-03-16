@@ -30,15 +30,8 @@
             background-repeat: repeat;
             position: relative;
         }
-        .header, .project-name {
-            position: fixed;
-            z-index: 10;
-            font-family: 'STSong', 'SimSun', serif;
-            color: white;
-            mix-blend-mode: difference;
-            transition: color 0.3s;
-        }
         .header {
+            position: fixed;
             top: 35px;
             left: 20px;
             display: flex;
@@ -46,13 +39,15 @@
             width: 100%;
             justify-content: space-between;
             padding: 0 20px;
+            z-index: 10;
+            color: white;
         }
         .name {
             font-size: 32px;
             font-weight: bold;
         }
         .button {
-            position: absolute;
+            position: fixed;
             top: 35px;
             right: 40px;
             font-size: 24px;
@@ -62,17 +57,21 @@
             cursor: pointer;
             transition: color 0.3s;
             font-family: inherit;
+            color: white;
         }
         .button:hover {
             color: #1F3A93;
         }
         .project-name {
+            position: fixed;
             bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 40px;
+            font-size: 50px;
             font-weight: bold;
             text-align: center;
+            mix-blend-mode: difference;
+            color: white;
         }
         .project-name:hover {
             color: #1F3A93;
@@ -90,7 +89,8 @@
         .nav-button {
             background: none;
             color: white;
-            font-size: 64px;
+            font-size: 80px;
+            font-weight: bold;
             border: none;
             cursor: pointer;
             transition: color 0.3s;
@@ -125,17 +125,17 @@
             }
             .project-name {
                 bottom: 40px;
-                font-size: 30px;
+                font-size: 40px;
             }
             .nav-button {
-                font-size: 48px;
+                font-size: 64px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="name" id="dynamicText">Dakang Wang</div>
+        <div class="name">Dakang Wang</div>
         <button class="button" onclick="window.location.href='about.html'">About me</button>
     </div>
     
