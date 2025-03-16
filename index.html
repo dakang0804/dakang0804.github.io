@@ -18,7 +18,7 @@
         }
         .slider-container {
             display: flex;
-            width: 500vw; /* 5 张图片，每张 100vw */
+            width: calc(100vw * 5); /* 根据图片数量调整宽度 */
             height: 100vh;
             transition: transform 0.5s ease-in-out;
         }
@@ -147,7 +147,7 @@
         <div class="slide" style="background-image: url('tree.jpg');" data-name="“Tree”" onclick="window.location.href='tree.html'"></div>
     </div>
     
-    <div class="project-name" id="project-name">“mine”</div>
+    <div class="project-name" id="project-name"></div>
     
     <div class="navigation">
         <button class="nav-button left" onclick="prevSlide()">⟨</button>
@@ -159,6 +159,10 @@
         const slides = document.querySelectorAll('.slide');
         const slider = document.getElementById('slider');
         const projectName = document.getElementById('project-name');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            projectName.textContent = slides[0].getAttribute('data-name');
+        });
 
         function updateSlider() {
             slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
