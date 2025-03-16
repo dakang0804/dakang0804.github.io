@@ -34,9 +34,9 @@
             left: 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             width: 100%;
             padding: 0 20px;
+            justify-content: space-between;
             z-index: 10;
         }
         .name {
@@ -45,25 +45,31 @@
             color: white;
         }
         .button {
-            padding: 8px 15px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.3);
+            font-size: 32px;
+            font-weight: bold;
             color: white;
+            border: none;
+            background: none;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s;
+            transition: color 0.3s;
         }
         .button:hover {
-            background-color: rgba(255, 255, 255, 0.6);
+            color: #0047AB; /* 克莱因蓝 */
         }
         .project-name {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             color: white;
-            font-size: 24px;
-            text-align: right;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
             z-index: 10;
+            transition: color 0.3s;
+        }
+        .project-name:hover {
+            color: #FF1493; /* 荧光粉色 */
         }
         .navigation {
             position: fixed;
@@ -94,33 +100,37 @@
             color: rgba(255, 255, 255, 1);
         }
         .categories {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             display: flex;
             gap: 20px;
             color: white;
             font-size: 18px;
+            align-items: flex-end;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="name">Dakang Wang</div>
+        <button class="button" onclick="window.location.href='about.html'">About me</button>
         <div class="categories">
             <div>Photography</div>
             <div>Grafik Design</div>
             <div>Sound Design</div>
         </div>
-        <button class="button" onclick="window.location.href='about.html'">About me</button>
     </div>
     
     <div class="slider-container" id="slider">
-        <div class="slide" style="background-image: url('project1.jpg');" data-name="Project 1" onclick="window.location.href='project1.html'"></div>
-        <div class="slide" style="background-image: url('project2.jpg');" data-name="Project 2" onclick="window.location.href='project2.html'"></div>
-        <div class="slide" style="background-image: url('project3.jpg');" data-name="Project 3" onclick="window.location.href='project3.html'"></div>
-        <div class="slide" style="background-image: url('project4.jpg');" data-name="Project 4" onclick="window.location.href='project4.html'"></div>
-        <div class="slide" style="background-image: url('project5.jpg');" data-name="Project 5" onclick="window.location.href='project5.html'"></div>
+        <div class="slide" style="background-image: url('project1.jpg');" data-name="“Project 1”" onclick="window.location.href='project1.html'"></div>
+        <div class="slide" style="background-image: url('project2.jpg');" data-name="“Project 2”" onclick="window.location.href='project2.html'"></div>
+        <div class="slide" style="background-image: url('project3.jpg');" data-name="“Project 3”" onclick="window.location.href='project3.html'"></div>
+        <div class="slide" style="background-image: url('project4.jpg');" data-name="“Project 4”" onclick="window.location.href='project4.html'"></div>
+        <div class="slide" style="background-image: url('project5.jpg');" data-name="“Project 5”" onclick="window.location.href='project5.html'"></div>
     </div>
     
-    <div class="project-name" id="project-name">Project 1</div>
+    <div class="project-name" id="project-name">“Project 1”</div>
     
     <div class="navigation">
         <button class="nav-button left" onclick="prevSlide()">⟨</button>
