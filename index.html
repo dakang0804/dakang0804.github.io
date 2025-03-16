@@ -17,23 +17,23 @@
             font-family: 'STSong', 'SimSun', serif;
             color: black;
             background-color: white;
-            cursor: url('custom-cursor.png'), auto; /* 使用自定义鼠标光标 */
+            cursor: url('custom-cursor.png'), auto;
         }
         .slider-container {
             display: flex;
-            width: calc(100vw * 5); /* 根据图片数量调整宽度 */
+            width: calc(100vw * 5);
             height: 100vh;
             transition: transform 0.5s ease-in-out;
         }
         .slide {
-            width: 60vw; /* 图片变小 */
-            height: 60vh; /* 图片变小 */
+            width: 70vw;
+            height: 70vh;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
             margin: auto;
-            margin-top: 120px; /* 图片向下移动 */
+            margin-top: 160px;
             cursor: grab;
         }
         .slide:active {
@@ -52,20 +52,17 @@
             color: black;
         }
         .name {
-            font-size: 32px;
+            font-size: 24px;
             color: black;
         }
         .chinese-name {
             position: fixed;
-            top: 35px;
+            top: 24px;
             right: 40px;
             font-size: 32px;
             color: black;
         }
         .button {
-            position: fixed;
-            bottom: 20px;
-            right: 40px;
             font-size: 24px;
             border: none;
             background: none;
@@ -79,15 +76,12 @@
         }
         .project-name {
             position: fixed;
-            top: 50px; /* 项目名称上移 */
+            top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 50px;
+            font-size: 34px;
             text-align: center;
             color: black;
-        }
-        .project-name:hover {
-            color: #1F3A93;
         }
         .navigation {
             position: fixed;
@@ -122,54 +116,14 @@
             width: 100%;
             bottom: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            flex-direction: column;
-            gap: 10px;
+            padding: 0 40px;
         }
         .contact-link {
             font-size: 18px;
             text-decoration: none;
             color: black;
-        }
-        @media (max-width: 768px) {
-            .header {
-                top: 20px;
-                left: 10px;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 100%;
-                padding: 0 15px;
-            }
-            .name {
-                font-size: 28px;
-            }
-            .chinese-name {
-                font-size: 28px;
-                top: 20px;
-                right: 30px;
-            }
-            .button {
-                bottom: 20px;
-                right: 30px;
-                font-size: 22px;
-            }
-            .project-name {
-                top: 40px; /* 调整移动端项目名称位置 */
-                font-size: 40px;
-            }
-            .slide {
-                width: 70vw;
-                height: 50vh;
-                margin-top: 140px;
-            }
-            .nav-button {
-                font-size: 64px;
-            }
-            .contact {
-                flex-direction: column;
-                align-items: center;
-            }
         }
     </style>
 </head>
@@ -183,20 +137,51 @@
         <div class="slide" style="background-image: url('mine.jpg');" data-name="“Mine”"></div>
         <div class="slide" style="background-image: url('butt.jpg');" data-name="“Butt”"></div>
         <div class="slide" style="background-image: url('still life.jpg');" data-name="“Still life”"></div>
-        <div class="slide" style="background-image: url('sound design.jpg');" data-name="“Sound Design”"></div>
+        <div class="slide" style="background-image: url('sound.jpg');" data-name="“Sound Design”"></div>
         <div class="slide" style="background-image: url('tree.jpg');" data-name="“Tree”"></div>
     </div>
     
     <div class="project-name" id="project-name"></div>
     
     <div class="contact">
-        <a href="mailto:your-email@example.com" class="contact-link">Instagram</a>
-        <a href="https://www.instagram.com/yourusername" target="_blank" class="contact-link">About me</a>
+        <a href="mailto:your-email@example.com" class="contact-link">Email</a>
+        <a href="https://www.instagram.com/yourusername" target="_blank" class="contact-link">Instagram</a>
+        <a href="about.html" class="contact-link">About me</a>
     </div>
     
     <div class="navigation">
         <button class="nav-button left" onclick="prevSlide()">⟨</button>
         <button class="nav-button right" onclick="nextSlide()">⟩</button>
     </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.getElementById('slider');
+        const projectName = document.getElementById('project-name');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            projectName.textContent = slides[0].getAttribute('data-name');
+        });
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
+            projectName.textContent = slides[currentIndex].getAttribute('data-name');
+        }
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        }
+    </script>
 </body>
 </html>
