@@ -62,12 +62,14 @@
             padding-top: 80px;
         }
         .text-section {
-            position: fixed;
     width: 30%;
     padding: 40px;
-    text-align: left; /* 调整文本对齐方式 */
-    position: relative; /* 可以调整定位 */
-    top: 50px; /* 例如向下移动 50px */
+    text-align: left;
+    position: fixed; /* 让文本固定在页面左侧 */
+    top: 50px;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
         .gallery {
             width: 70%;
