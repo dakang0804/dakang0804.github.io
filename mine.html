@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dakang Wang</title>
+    <style>
+        @font-face {
+            font-family: 'MonorBold';
+            src: url('Monor_Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'MonorRegular';
+            src: url('Monor_Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'MonorRegular', sans-serif;
+            color: black;
+            background-color: white;
+            overflow-y: auto;
+        }
+        .header {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            display: flex;
+            align-items: baseline;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+            background-color: white;
+        }
+        .name {
+            font-size: 24px;
+            color: black;
+        }
+        .chinese-name {
+            position: fixed;
+            top: 33px;
+            right: 40px;
+            font-family: 'STSong', 'SimSun', serif;
+            font-size: 22px;
+            color: black;
+        }
+        .content {
+            display: flex;
+            width: 100%;
+            padding-top: 80px;
+        }
+        .text-section {
+            width: 30%;
+            padding: 20px;
+        }
+        .gallery {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gallery-item {
+            width: 80%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="name">Dakang Wang</div>
+        <div class="chinese-name">王大康</div>
+    </div>
+    
+    <div class="content">
+        <div class="text-section">
+            <p>这里是文本内容。可以介绍你的作品或者写点别的内容。</p>
+        </div>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="image1.jpg" alt="Image 1">
+                <div class="caption">图片 1 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image2.jpg" alt="Image 2">
+                <div class="caption">图片 2 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image3.jpg" alt="Image 3">
+                <div class="caption">图片 3 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image4.jpg" alt="Image 4">
+                <div class="caption">图片 4 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image5.jpg" alt="Image 5">
+                <div class="caption">图片 5 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image6.jpg" alt="Image 6">
+                <div class="caption">图片 6 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image7.jpg" alt="Image 7">
+                <div class="caption">图片 7 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image8.jpg" alt="Image 8">
+                <div class="caption">图片 8 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image9.jpg" alt="Image 9">
+                <div class="caption">图片 9 的说明文字</div>
+            </div>
+            <div class="gallery-item">
+                <img src="image10.jpg" alt="Image 10">
+                <div class="caption">图片 10 的说明文字</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
