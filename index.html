@@ -130,6 +130,32 @@
         .nav-button:hover {
             color: #1F3A93;
         }
+        .bottom-left-svg {
+    position: fixed;
+    bottom: 200px; /* 距离底部 20px */
+    left: -30px;   /* 距离左侧 20px */
+    width: 150px;  /* SVG 宽度 */
+    height: auto; /* 让高度自动适应 */
+}
+
+.bottom-left-svg img {
+    width: 100%;
+    height: auto;
+}
+        .top-right-svg {
+    position: fixed;  /* 固定在页面上，不随滚动移动 */
+    top: 60px;        /* 距离顶部 20px */
+    right: -10px;      /* 距离右侧 20px */
+    width: 60px;      /* 设置宽度 */
+    height: auto;     /* 保持原比例 */
+}
+
+.top-right-svg img {
+    width: 100%;
+    height: auto;
+}
+
+
             @media (max-width: 768px) {
             body, html {
                 font-family: 'MonorRegular', sans-serif;
@@ -235,5 +261,11 @@
         <button class="nav-button left" onclick="prevSlide()">⟨</button>
         <button class="nav-button right" onclick="nextSlide()">⟩</button>
     </div>
+    <div class="bottom-left-svg">
+    <img src="svg5.svg" alt="SVG 图形">
+</div>
+    <div class="top-right-svg">
+    <img src="svg6.svg" alt="SVG 图形">
+</div>
 </body>
 </html>
