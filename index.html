@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dakang Wang</title>
     <style>
+        @font-face {
+            font-family: 'MonorBold';
+            src: url('Monor_Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'MonorRegular';
+            src: url('Monor_Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +27,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: 'STSong', 'SimSun', serif;
+            font-family: 'MonorRegular', sans-serif;
             color: black;
             background-color: white;
             cursor: url('custom-cursor.png'), auto;
@@ -129,7 +142,7 @@
         /* 移动端优化 */
         @media (max-width: 768px) {
             body {
-    font-family: 'STSong', 'SimSun', serif; /* 统一手机端字体为宋体 */}
+    font-family: 'MonorRegular', sans-serif; /* 统一手机端字体为宋体 */}
             .slide {
                 width: 70vw;
                 height: 70vh;
@@ -224,3 +237,4 @@
     </script>
 </body>
 </html>
+              
