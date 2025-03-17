@@ -72,7 +72,6 @@
             position: fixed;
             top: 33px;
             right: 40px;
-            font-family: 'STSong', 'SimSun', serif; 
             font-size: 22px;
             color: black;
         }
@@ -235,6 +234,69 @@
                 updateSlider();
             }
         }
+    </script>
+    <svg id="draggable-svg" viewBox="0 0 80 79" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 50px; left: 50px; width: 100px; height: 100px; cursor: grab;">
+        <path d="M39.8119 18.0091C37.7859 13.0403 ... " fill="#121F7A" stroke="#121F7A"></path>
+    </svg>
+    
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.getElementById('slider');
+        const projectName = document.getElementById('project-name');
+        const svgElement = document.getElementById('draggable-svg');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            projectName.textContent = slides[0].getAttribute('data-name');
+        });
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
+            projectName.textContent = slides[currentIndex].getAttribute('data-name');
+            changeSVGColor();
+        }
+
+        function nextSlide() {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        }
+
+        function changeSVGColor() {
+            const colors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33D4'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            svgElement.setAttribute('fill', randomColor);
+            svgElement.setAttribute('stroke', randomColor);
+        }
+
+        let offsetX, offsetY, isDragging = false;
+
+        svgElement.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            offsetX = e.clientX - svgElement.getBoundingClientRect().left;
+            offsetY = e.clientY - svgElement.getBoundingClientRect().top;
+            svgElement.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            if (isDragging) {
+                svgElement.style.left = `${e.clientX - offsetX}px`;
+                svgElement.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', function () {
+            isDragging = false;
+            svgElement.style.cursor = 'grab';
+        });
     </script>
 </body>
 </html>
