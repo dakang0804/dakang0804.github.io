@@ -57,7 +57,6 @@
             color: black;
         }
         .content {
-            position: fixed;
             display: flex;
             width: 100%;
             padding-top: 80px;
@@ -98,6 +97,51 @@
     top: 20px; /* 向下移动标题 */
     left: 0px; /* 可调整水平位置 */
 }
+        @media (max-width: 768px) {
+            .header {
+                top: 10px;
+                padding: 0 10px;
+            }
+            .name {
+                font-size: 20px;
+            }
+            .chinese-name {
+                font-size: 18px;
+                top: 12px;
+                right: 20px;
+            }
+            .content {
+                flex-direction: column;
+                padding-top: 60px;
+            }
+            .text-section {
+                width: 100%;
+                position: relative;
+                height: auto;
+                text-align: center;
+                padding: 10px;
+            }
+            .gallery {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .gallery-item {
+                width: 90%;
+                margin: 10px auto;
+            }
+            .gallery-item img {
+                width: 100%;
+            }
+            .caption {
+                font-size: 16px;
+            }
+            .main-title {
+                font-size: 24px;
+                top: 10px;
+                left: 0;
+            }
+        }
     </style>
 </head>
 <body>
