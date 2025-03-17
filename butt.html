@@ -103,6 +103,19 @@
     top: 20px; /* 向下移动标题 */
     left: 0px; /* 可调整水平位置 */
 }
+        .bottom-left-svg {
+    position: fixed;
+    bottom: 20px; /* 距离底部 20px */
+    left: 20px;   /* 距离左侧 20px */
+    width: 80px;  /* SVG 宽度 */
+    height: auto; /* 让高度自动适应 */
+}
+
+.bottom-left-svg img {
+    width: 100%;
+    height: auto;
+}
+
             @media (max-width: 768px) {
             .header {
                 top: 10px;
@@ -210,8 +223,7 @@ So I try to take photo of each butt as portrait and let themselves tell stories.
         </div>
     </div>
      <div class="bottom-left-svg">
-        <svg width="80" height="80" viewBox="0 0 80 80" xmlns="svg1.xml">
-        </svg>
-    </div>
+    <img src="svg1.svg" alt="SVG 图形">
+</div>
 </body>
 </html>

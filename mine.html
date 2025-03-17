@@ -97,13 +97,26 @@
         }
             .main-title {
                 position: fixed;
-    font-size: 80px; /* 修改标题大小 */
+    font-size: 70px; /* 修改标题大小 */
     font-weight: bold;
     margin-bottom: 40px;
     position: relative; /* 让标题可调整位置 */
     top: 20px; /* 向下移动标题 */
     left: 0px; /* 可调整水平位置 */
 }
+        .bottom-left-svg {
+    position: fixed;
+    bottom: 40px; /* 距离底部 20px */
+    left: 40px;   /* 距离左侧 20px */
+    width: 120px;  /* SVG 宽度 */
+    height: auto; /* 让高度自动适应 */
+}
+
+.bottom-left-svg img {
+    width: 100%;
+    height: auto;
+}
+
         @media (max-width: 768px) {
             .header {
                 top: 10px;
@@ -207,5 +220,8 @@
             </div>
         </div>
     </div>
+    <div class="bottom-left-svg">
+    <img src="svg2.svg" alt="SVG 图形">
+</div>
 </body>
 </html>
