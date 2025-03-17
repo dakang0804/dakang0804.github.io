@@ -72,11 +72,16 @@
     overflow-y: auto;
 }
         .gallery {
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* 让图片部分固定 */
+    top: 80px;
+    right: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
         .gallery-item {
             width: 80%;
             margin: 20px 0;
