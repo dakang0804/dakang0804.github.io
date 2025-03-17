@@ -208,6 +208,22 @@
     </div>
 
     <script>
+        // 让点击项目图片时跳转到对应页面
+slides.forEach(slide => {
+    slide.addEventListener('click', function() {
+        let projectName = slide.getAttribute('data-name').replace(/["']/g, '');
+        let link = projectName.replace(/\s+/g, '-').toLowerCase() + '.html';
+        window.location.href = link;
+    });
+});
+
+// 让点击项目名称时跳转到对应页面
+projectName.addEventListener('click', function() {
+    let projectText = projectName.textContent.replace(/["']/g, '');
+    let link = projectText.replace(/\s+/g, '-').toLowerCase() + '.html';
+    window.location.href = link;
+});
+
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const slider = document.getElementById('slider');
