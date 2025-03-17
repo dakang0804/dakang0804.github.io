@@ -92,6 +92,14 @@
             width: 100%;
             height: auto;
         }
+        .gallery-row {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+        .gallery-row .gallery-item {
+            width: 48%; /* 让两张图片占据整行 */
+        }
         .caption {
             margin-top: 10px;
             font-size: 18px;
@@ -123,10 +131,11 @@
                 padding: 0 10px;
             }
             .name {
-                font-size: 20px;
+                font-size: 18px;
+                left: 10px;
             }
             .chinese-name {
-                font-size: 18px;
+                font-size: 14px;
                 top: 12px;
                 right: 20px;
             }
@@ -173,17 +182,21 @@
     <div class="content">
         <div class="text-section">
             <h1 class="main-title">Product photography</h1>
-            <p>Product such as necklace parfeum</p>
+            <p> </p>
         </div>
         <div class="gallery">
-            <div class="gallery-item">
-                <img src="Production/butt1.jpg" alt="Image 1">
-                <div class="caption">图片 1 的说明文字</div>
-            </div>
-            <div class="gallery-item">
-                <img src="Production/butt2.jpg" alt="Image 2">
-                <div class="caption">图片 2 的说明文字</div>
-            </div>
+            
+            <div class="gallery-row">
+        <div class="gallery-item">
+            <img src="Production/mm1.jpg" alt="Image 1">
+            <div class="caption">image1: Maison Margiela.</div>
+        </div>
+        <div class="gallery-item">
+            <img src="Production/mm2.jpg" alt="Image 3">
+            <div class="caption">image2: Maison Margiela.</div>
+        </div>
+        </div>
+            
             <div class="gallery-item">
                 <img src="Production/butt3.jpg" alt="Image 3">
                 <div class="caption">图片 3 的说明文字</div>
