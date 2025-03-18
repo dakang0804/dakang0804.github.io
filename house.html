@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dakang Wang</title>
+    <style>
+        @font-face {
+            font-family: 'MonorBold';
+            src: url('Font/Monor_Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'MonorRegular';
+            src: url('Font/Monor_Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            cursor: url('custom-cursor.png'), auto;
+            width: 100%;
+            height: 100%;
+            font-family: 'MonorRegular', sans-serif;
+            color: black;
+            background: transparent;
+            overflow-y: auto;
+        }
+        .header {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            display: flex;
+            align-items: baseline;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            background-color: none;
+        }
+        .name {
+            font-size: 24px;
+            color: black;
+        }
+        .chinese-name {
+            position: fixed;
+            top: 33px;
+            right: 40px;
+            font-family: 'STSong', 'SimSun', serif;
+            font-size: 22px;
+            color: black;
+        }
+        .content {
+            display: flex;
+            width: 100%;
+            padding-top: 80px;
+        }
+        .text-section {
+            width: 30%;
+            padding: 40px;
+            text-align: left;
+            position: fixed; /* 让文本固定在页面左侧 */
+            top: 50px;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .gallery {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;  /* 让它从最顶部开始 */
+    right: 0;
+    bottom: 0;
+    overflow-y: auto; /* 允许滚动 */
+    padding-top: 80px; /* 给上方增加 padding，避免内容被 header 遮挡 */
+}
+        .gallery-item {
+            width: 80%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+        }
+        .gallery-row {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+.gallery-row .gallery-item {
+    width: 48%; /* 让两张图片占据整行 */
+}
+        .caption {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+            .main-title {
+                position: fixed;
+    font-size: 70px; /* 修改标题大小 */
+    font-weight: bold;
+    margin-bottom: 40px;
+    position: relative; /* 让标题可调整位置 */
+    top: 20px; /* 向下移动标题 */
+    left: 0px; /* 可调整水平位置 */
+}
+        .bottom-left-svg {
+    position: fixed;
+    bottom: 40px; /* 距离底部 20px */
+    left: 40px;   /* 距离左侧 20px */
+    width: 120px;  /* SVG 宽度 */
+    height: auto; /* 让高度自动适应 */
+}
+
+.bottom-left-svg img {
+    width: 100%;
+    height: auto;
+}
+
+        @media (max-width: 768px) {
+            .header {
+                top: 10px;
+                padding: 0 10px;
+            }
+            .name {
+                font-size: 18px;
+                left: 10px;
+            }
+            .chinese-name {
+                font-size: 14px;
+                top: 12px;
+                right: 20px;
+            }
+            .content {
+                flex-direction: column;
+                padding-top: 60px;
+            }
+            .text-section {
+                width: 100%;
+                position: relative;
+                height: auto;
+                text-align: center;
+                padding-top: 20px;
+            }
+            .gallery {
+                width: 100%;
+                position: relative;
+                height: auto;
+                padding-top: 85px;
+            }
+            .gallery-item {
+                width: 90%;
+                margin: 30px auto;
+            }
+            .gallery-item img {
+                width: 100%;
+            }
+            .gallery-row {
+                width: 100%; /* 让并列的图片也占满 */
+                gap: 5px; /* 添加间距 */
+            }
+
+            .gallery-row .gallery-item {
+                width: 50%; /* 在手机端，两张图片各占 50% */
+            }
+            .caption {
+                font-size: 16px;
+            }
+            .main-title {
+                font-size: 30px;
+                top: 10px;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="name">Dakang Wang</div>
+        <div class="chinese-name">王大康</div>
+    </div>
+    
+    <div class="content">
+        <div class="text-section">
+            <h1 class="main-title">House</h1>
+            <p>In the information age, people are like birds in living cages. 
+                The living environment created by technology is similar to the forests and cities displayed on the screens in the cages.
+                Information and technology have brought many conveniences to people, but at the same time they have made people tired and disoriented. 
+                It is like a bird cannot distinguish whether it is in a cage or in a forest. People are fooled by the electronic world. 
+                What you have to do is find your own direction in this world.</p>
+        </div>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="House/house1.jpg" alt="Image 1">
+                <div class="caption">image1: Family ablum of my grandfather, he used to work as a meiner. Left 2 </div>
+            </div>
+            <div class="gallery-item">
+                <img src="House/mine2.jpg" alt="Image 2">
+                <div class="caption">image2: One of the mine change from 1984 till 2022. Images from Google Earth.</div>
+            </div>
+            <div class="gallery-item">
+                <img src="House/mine3.jpg" alt="Image 3">
+                <div class="caption">image3: City change from 1984 till 2022. Images from Google Earth.</div>
+            </div>
+            <div class="gallery-item">
+                <img src="House/mine4.jpg" alt="Image 4">
+                <div class="caption">image4: Abandoned railway in front of the copper mine.</div>
+            </div>
+            
+            <div class="gallery-row">
+        <div class="gallery-item">
+            <img src="House/mine5.jpg" alt="Image 2">
+            <div class="caption">image5: A part from the railway.</div>
+        </div>
+        <div class="gallery-item">
+            <img src="House/mine6.jpg" alt="Image 3">
+            <div class="caption">image6: A part from the railway. </div>
+        </div>
+        </div>
+
+            
+
+            
+        </div>
+    </div>
+    <div class="bottom-left-svg">
+    <img src="svg6.svg" alt="SVG 图形">
+</div>
+</body>
+</html>
