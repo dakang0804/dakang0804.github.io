@@ -101,6 +101,19 @@
 .gallery-row .gallery-item {
     width: 48%; /* 让两张图片占据整行 */
 }
+        .video-container {
+    position: relative;
+    width: 80%; /* 让视频适应容器大小 */
+    max-width: 800px; /* 限制最大宽度 */
+    margin: 20px auto; /* 居中显示 */
+    aspect-ratio: 16 / 9; /* 让视频保持16:9比例 */
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
         .caption {
             margin-top: 10px;
             font-size: 18px;
@@ -205,17 +218,29 @@
                 <div class="caption">image1</div>
             </div>
             <div class="gallery-item">
-                <img src="House/mine2.jpg" alt="Image 2">
+                <img src="House/house2.jpg" alt="Image 2">
                 <div class="caption">image2: Details of installation.</div>
             </div>
             <div class="gallery-item">
-                <img src="House/mine3.jpg" alt="Image 3">
+                <img src="House/house3.jpg" alt="Image 3">
                 <div class="caption">image3: Details of installation.</div>
             </div>
             <div class="gallery-item">
-                <img src="House/mine4.jpg" alt="Image 4">
+                <img src="House/house4.jpg" alt="Image 4">
                 <div class="caption">image4: Details of installation.</div>
             </div>
+            <div class="gallery-item">
+                <img src="House/house5.jpg" alt="Image 5">
+                <div class="caption">image5: Screenshot of the videos in the cage.</div>
+            </div>
+            
+            <div class="video-container">
+                <iframe src="https://youtu.be/DA4g42pvrWw" 
+                title="Video in the cage." frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+                encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+
             
             <div class="gallery-row">
         <div class="gallery-item">
