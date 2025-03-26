@@ -227,7 +227,36 @@
         </div>
     </div>
     <div class="bottom-left-svg">
-    <img src="svg10.svg" alt="SVG 图形">
-</div>
+    <img src="svg10.svg" alt="SVG 图形"
+        ontouchstart="startDrag(event)" 
+        ontouchmove="drag(event)">
+    </div>
+
+    <script>
+let touchOffset = { x: 0, y: 0 };
+let svgEl = null;
+
+function startDrag(event) {
+    svgEl = event.target;
+    const touch = event.touches[0];
+    const rect = svgEl.getBoundingClientRect();
+    touchOffset.x = touch.clientX - rect.left;
+    touchOffset.y = touch.clientY - rect.top;
+}
+
+function drag(event) {
+    if (!svgEl) return;
+    event.preventDefault(); // 阻止滚动
+
+    const touch = event.touches[0];
+    const newX = touch.clientX - touchOffset.x;
+    const newY = touch.clientY - touchOffset.y;
+
+    svgEl.style.position = 'fixed';
+    svgEl.style.left = `${newX}px`;
+    svgEl.style.top = `${newY}px`;
+}
+</script>
+
 </body>
 </html>
