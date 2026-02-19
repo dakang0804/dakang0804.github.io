@@ -1,277 +1,1714 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakang Wang</title>
-    <style>
-        @font-face {
-            font-family: 'MonorBold';
-            src: url('Font/Monor_Bold.otf') format('opentype');
-            font-weight: bold;
-            font-style: normal;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dakang Wang</title>
 
-        @font-face {
-            font-family: 'MonorRegular';
-            src: url('Font/Monor_Regular.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'MonorRegular', sans-serif;
-            color: black;
-            background-color: white;
-            cursor: url('custom-cursor.png'), auto;
-        }
-        .slider-container {
-            display: flex;
-            width: calc(100vw * 8);
-            height: 100vh;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slide {
-            width: 70vw;
-            height: 70vh;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            margin: auto;
-            margin-top: 135px;
-            cursor: pointer;
-        }
-        .slide:active {
-            cursor: grabbing;
-        }
-        .header {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            display: flex;
-            align-items: baseline;
-            width: 100%;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 10;
-            color: black;
-        }
-        .name {
-            font-size: 24px;
-            color: black;
-        }
-        .chinese-name {
-            position: fixed;
-            top: 33px;
-            right: 40px;
-            font-family: 'STSong', 'SimSun', serif;
-            font-size: 22px;
-            color: black;
-        }
-        .project-name {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 34px;
-            text-align: center;
-            color: black;
-            cursor: pointer;
-        }
-        .project-name:hover {
-            color: #1F3A93;
-        }
-        .contact {
-            position: fixed;
-            width: 100%;
-            bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
-        .contact-link {
-            font-size: 24px;
-            text-decoration: none;
-            color: black;
-        }
-            .navigation {
-            position: fixed;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-        }
-        .nav-button {
-            background: none;
-            color: black;
-            font-size: 80px;
-            border: none;
-            cursor: pointer;
-            transition: color 0.3s;
-            position: absolute;
-        }
-        .nav-button.left {
-            left: 20px;
-        }
-        .nav-button.right {
-            right: 20px;
-        }
-        .nav-button:hover {
-            color: #1F3A93;
-        }
-        .bottom-left-svg {
-    position: fixed;
-    bottom: 200px; /* 距离底部 20px */
-    left: -30px;   /* 距离左侧 20px */
-    width: 150px;  /* SVG 宽度 */
-    height: auto; /* 让高度自动适应 */
-}
+  <style>
 
-.bottom-left-svg img {
-    width: 100%;
-    height: auto;
-}
-        .top-right-svg {
-    position: fixed;  /* 固定在页面上，不随滚动移动 */
-    top: 60px;        /* 距离顶部 20px */
-    right: -10px;      /* 距离右侧 20px */
-    width: 60px;      /* 设置宽度 */
-    height: auto;     /* 保持原比例 */
-}
+    @font-face{
+      font-family: "MenuFont";
+      src: url("Font/Zodiak_Complete/Fonts/OTF/Zodiak-Regular.otf") format("opentype");
+    }
+    @font-face{
+      font-family: "TitleFont";
+      src: url("Font/Zodiak_Complete/Fonts/OTF/Zodiak-BoldItalic.otf") format("opentype");
+    }
 
-.top-right-svg img {
-    width: 100%;
-    height: auto;
-}
+    :root{
+      --font-body: "MenuFont", sans-serif;
+      --font-nav: "MenuFont", sans-serif;
+      --font-title: "TitleFont", sans-serif;
+
+      /* 菜单展开内容：副标题/时间（可单独改） */
+      --font-menu-subtitle: "TitleFont", sans-serif;
+      --menu-subtitle-size: 20px;
+      --menu-subtitle-weight: 700;
+
+      /* Exhibitions：年份/日期（可单独改） */
+      --font-ex-date: "TitleFont", sans-serif;
+      --ex-date-size: 22px;
+      --ex-date-weight: 700;
+
+      --bg: #ffffff;
+      --text: #111111;
+      --red: #ff0000;
+
+      --nav-size: 30px;
+      --work-size: 70px;
+
+      --nav-pad-x: 28px;
+      --nav-pad-y: 18px;
+
+      --list-pad-x: 28px;
+      --list-pad-top: 26px;
+
+      --fade-ms: 420ms;
+
+      --panel-gap: 40px;
+      --img-gap: 18px;
+
+      --detail-body-size: 15px;
+
+      --header-offset: 92px;
+      --menu-title-size: 50px;
+
+      --works-nudge-up: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+
+    /* ===== hover background images ===== */
+    .bg{
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--bg);
+      transition: opacity 220ms ease;
+    }
+    .bg.is-hidden{ opacity: 0; }
+
+    .bg__layer{
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity var(--fade-ms) ease;
+      will-change: opacity;
+    }
+    .bg__layer.is-visible{ opacity: 1; }
+
+    /* ===== fixed header ===== */
+    header{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: var(--nav-pad-y) var(--nav-pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+    }
+    .brand a,
+    .nav a{
+      font-size: var(--nav-size);
+      font-family: var(--font-nav);
+      line-height: 1;
+      text-decoration: none;
+      color: var(--text);
+      transition: color 180ms ease;
+      cursor: pointer;
+    }
+    .nav{
+      display: flex;
+      gap: 26px;
+      align-items: center;
+    }
+    .nav a:hover{ color: var(--red); }
+
+    /* ===== main scroll ===== */
+    main{
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      overflow: auto;
+      padding:
+        calc(var(--header-offset) + var(--list-pad-top))
+        var(--list-pad-x)
+        48px
+        var(--list-pad-x);
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    main::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Works 点击后：作品列表整体向上滑动一点（有动画） */
+    #worksList{
+      transition: transform 320ms ease;
+      will-change: transform;
+    }
+    body.works-tight #worksList{
+      transform: translateY(calc(-1 * var(--works-nudge-up)));
+    }
+
+    /* ===== menu panels ===== */
+    .menu-panel{
+      width: 100%;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height 520ms ease, opacity 260ms ease, transform 260ms ease;
+      will-change: max-height, opacity, transform;
+      margin: 0 0 20px 0;
+    }
+    .menu-panel.is-open{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-panel-inner{
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--panel-gap);
+      padding: 18px 0 6px 0;
+      align-items: start;
+    }
+
+    .menu-title{
+      font-family: var(--font-title);
+      font-size: var(--menu-title-size);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 14px 0;
+    }
+
+    .menu-text{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      line-height: 1.85;
+      margin: 0 0 18px 0;
+      max-width: 52ch;
+      white-space: pre-wrap;
+    }
+
+    /* 副标题（Education / Artist Statement / Contact） */
+    .menu-subtitle{
+      font-family: var(--font-menu-subtitle);
+      font-size: var(--menu-subtitle-size);
+      font-weight: var(--menu-subtitle-weight);
+      line-height: 1.25;
+      margin: 70px 0 8px 0;
+    }
+    .menu-subtitle--first{ margin-top: 0; }
+
+    /* 时间区间（Education 每条的时间） */
+    .menu-time{
+      font-family: var(--font-menu-subtitle);
+      font-size: var(--menu-subtitle-size);
+      font-weight: var(--menu-subtitle-weight);
+      line-height: 1.25;
+      margin: 10px 0 6px 0;
+      opacity: .95;
+    }
+
+    .menu-block{
+      margin-bottom: 14px;
+      max-width: 52ch;
+    }
+    .menu-block p{
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      line-height: 1.85;
+    }
+
+    .menu-links{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .menu-links a{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      text-decoration: none;
+      color: var(--text);
+      width: fit-content;
+      opacity: .9;
+      transition: color 180ms ease, opacity 180ms ease;
+    }
+    .menu-links a:hover{ color: var(--red); opacity: 1; }
+
+    /* 只给 ins 和 email 下划线 */
+    .menu-links a.is-underlined{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Info 最后一行版权 */
+    .rights{
+      margin-top: 22px;
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      line-height: 1.6;
+      opacity: .85;
+    }
+
+    .menu-panel-inner.one-col{ grid-template-columns: 1fr; }
+
+    /* ====== ✅ 图片区：支持自由两张并列（不裁切） ====== */
+    .gallery{
+      display: flex;
+      flex-direction: column;
+      gap: var(--img-gap);
+      padding-bottom: var(--img-gap);
+    }
+    .gallery-row{
+      display: grid;
+      gap: var(--img-gap);
+      align-items: start;
+    }
+    .gallery-row.one{ grid-template-columns: 1fr; }
+    .gallery-row.two{ grid-template-columns: 1fr 1fr; }
+
+    .gallery-row img{
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
 
 
-            @media (max-width: 768px) {
-            body, html {
-                font-family: 'MonorRegular', sans-serif;
-            }
-                .header {
-                top: 10px;
-                padding: 0 10px;
-            }
-            .name {
-                font-size: 18px;
-                left: 10px;
-            }
-            .chinese-name {
-                font-size: 14px;
-                top: 12px;
-                right: 20px;
-            }
-            .project-name {
-                font-size: 25px;
-                top: 40px;
-            }
-            .slide {
-                width: 80vw;
-                height: 60vh;
-                margin-top: 150px;
-            }
-            .nav-button {
-                font-size: 50px;
-            }
-            .contact {
-                flex-direction: column;
-                align-items: center;
-                padding: 0 10px;
-            }
-            .contact-link {
-                font-size: 15px;
-                margin-bottom: 5px;
-            }
-        }
-    </style>
+    /* ====== ✅ Works: 双列独立滚动（右侧图片区） ====== */
+    .gallery-split{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--img-gap);
+      align-items: start;
+    
+      min-width: 0;
+    }
+    .gallery-col{
+      display: flex;
+      flex-direction: column;
+      gap: var(--img-gap);
+      overflow: visible;          /* ✅ 不做内部裁切/滚动 */
+      max-height: none;           /* ✅ 让面板高度跟随图片完整展开 */
+      padding-right: 0;
+    
+      min-width: 0;
+    }
+    .gallery-col::-webkit-scrollbar{ width:0; height:0; }
+
+    .zoomable{
+      cursor: zoom-in;
+    }
+
+    /* ====== ✅ Lightbox (点击放大) ====== */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 34px;
+      background: rgba(255,255,255,.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .lightbox.is-open{ display: flex; }
+
+    .lightbox__img{
+      max-width: 92vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .lightbox__close{
+      position: absolute;
+      top: var(--nav-pad-y);
+      right: var(--nav-pad-x);
+      font-family: var(--font-nav);
+      font-size: var(--nav-size);
+      line-height: 1;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: var(--text);
+      cursor: pointer;
+      transition: color 180ms ease;
+    }
+    .lightbox__close:hover{ color: var(--red); }
+
+
+    /* ===== Exhibitions: 年份/日期作为副标题 ===== */
+    .ex-list{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 70ch;
+    }
+    .ex-item{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 14px;
+      align-items: baseline;
+    }
+    .ex-date{
+      font-family: var(--font-ex-date);
+      font-size: var(--ex-date-size);
+      font-weight: var(--ex-date-weight);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .ex-body{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      line-height: 1.85;
+    }
+
+    /* ====== ✅ Exhibitions panel: text + posters (50/50) ====== */
+    .ex-split{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--panel-gap);
+      align-items: start;
+      min-width: 0;
+    }
+    .ex-left{ min-width: 0; }
+    .ex-posters-wrap{
+      position: relative;
+      min-width: 0;
+      overflow-x: hidden;
+      overflow-y: visible;
+      /* ✅ Let posters scroll UNDER the fixed header (no visible "roof") */
+      margin-top: calc(-1 * var(--header-offset));
+      padding-top: var(--header-offset);
+    }
+    .ex-posters{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--img-gap);
+      align-items: start;
+      min-width: 0;
+      margin-top: 0px;
+    }
+    .ex-poster-col{
+      display: flex;
+      flex-direction: column;
+      gap: var(--img-gap);
+      overflow: auto;          /* ✅ 每列独立滚动 */
+      max-height: 320px;       /* ✅ JS 会在打开时改成与文字同高 */
+      padding-right: 6px;      /* ✅ 给滚动条一点空间（即使隐藏也更稳） */
+      min-width: 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .ex-poster-col::-webkit-scrollbar{ width:0; height:0; }
+
+    .ex-fog{
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 0;
+      height: clamp(90px, 22%, 160px);
+      pointer-events: none;
+      /* ✅ white fog fade (no blur): from bottom to top */
+      background: linear-gradient(
+        to top,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,.92) 30%,
+        rgba(255,255,255,.55) 65%,
+        rgba(255,255,255,0) 100%
+      );
+    }
+
+    /* ===== works list ===== */
+    .works{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1600px;
+    }
+    .work-row{ width: 100%; }
+
+    .work-item{
+      display: inline-block;
+      font-size: var(--work-size);
+      font-family: var(--font-title);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.05;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 220ms ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .work-item:hover{ color: var(--red); }
+
+    /* work panels */
+    .panel{
+      width: 100%;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height 520ms ease, opacity 260ms ease, transform 260ms ease;
+      will-change: max-height, opacity, transform;
+      margin-top: 14px;
+    }
+    .panel.is-open{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .panel-inner{
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--panel-gap);
+      padding: 18px 0 6px 0;
+      align-items: start;
+    }
+
+    .panel-inner > div{ min-width: 0; }
+
+    .detail-desc{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      line-height: 1.85;
+      margin: 0 0 18px 0;
+      max-width: 44ch;
+      white-space: pre-wrap;
+    }
+
+    details{ margin: 14px 0; }
+
+    /* ====== ✅ 2) Book/Exhibition hover 变红 ====== */
+    summary{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      padding: 6px 0;
+      user-select: none;
+      list-style: none;
+      color: var(--text);
+      transition: color 180ms ease;
+    }
+    summary:hover{ color: var(--red); }
+    summary::-webkit-details-marker{ display:none; }
+
+    .subcontent{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .subcontent a{
+      font-family: var(--font-body);
+      font-size: var(--detail-body-size);
+      text-decoration: none;
+      color: var(--text);
+      width: fit-content;
+      opacity: .9;
+      transition: color 180ms ease, opacity 180ms ease;
+      white-space: pre-line;   /* ✅ 关键 */
+      display: block;
+    }
+    .subcontent a:hover{ color: var(--red); opacity: 1; }
+
+    /* ✅ Imprint/静态内容：hover 不变红 */
+    .subcontent a.no-red:hover{ color: var(--text); opacity: .9; }
+
+
+    @media (max-width: 900px){
+      main{ padding-left: 18px; padding-right: 18px; }
+      .menu-panel-inner,
+      .panel-inner{ grid-template-columns: 1fr; }
+      .menu-panel-inner.one-col{ grid-template-columns: 1fr; }
+      .menu-text, .menu-block{ max-width: 70ch; }
+      .ex-item{ grid-template-columns: 1fr; row-gap: 6px; }
+      .ex-date{ white-space: normal; }
+      .gallery-row.two{ grid-template-columns: 1fr; } /* 小屏两列变一列 */
+      .gallery-split{ grid-template-columns: 1fr; }
+      .gallery-col{ max-height: none; overflow: visible; padding-right: 0; }
+      .ex-split{ grid-template-columns: 1fr; }
+      .ex-posters{ grid-template-columns: 1fr; }
+      .ex-poster-col{ max-height: none; overflow: visible; padding-right: 0; }
+
+    }
+  
+  </style>
 </head>
+
 <body>
-    <div class="header">
-        <div class="name">Dakang Wang</div>
-        <div class="chinese-name">王大康</div>
-    </div>
-    
-    <div class="slider-container" id="slider">
-        <div class="slide" style="background-image: url('Home page image/mine.jpg');" data-name="Mine" data-link="mine.html"></div>
-        <div class="slide" style="background-image: url('Home page image/butt.jpg');" data-name="Butt" data-link="butt.html"></div>
-        <div class="slide" style="background-image: url('Home page image/still life.jpg');" data-name="Product photography" data-link="production.html"></div>
-        <div class="slide" style="background-image: url('Home page image/sound design.jpg');" data-name="Sound & Music" data-link="sound.html"></div>
-        <div class="slide" style="background-image: url('Home page image/tree.jpg');" data-name="House" data-link="house.html"></div>
-        <div class="slide" style="background-image: url('Home page image/home.jpg');" data-name="Home, sweet home" data-link="home.html"></div>
-        <div class="slide" style="background-image: url('Home page image/exp1.jpg');" data-name="Experiment No.1" data-link="experiment1.html"></div>
-        <div class="slide" style="background-image: url('Home page image/exp2.jpg');" data-name="Experiment No.2" data-link="experiment2.html"></div>
-    </div>
-    
-    <div class="project-name" id="project-name"></div>
-    
-    <script>
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const slider = document.getElementById('slider');
-        const projectName = document.getElementById('project-name');
+  <div class="bg" id="bgWrap" aria-hidden="true">
+    <div class="bg__layer" id="bgA"></div>
+    <div class="bg__layer" id="bgB"></div>
+  </div>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            updateProjectName();
+  <header>
+    <div class="brand">
+      <a href="#" id="navName" aria-label="Open about">Dakang Wang</a>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#" id="navWorks">Works</a>
+      <a href="#" id="navExhibitions">Exhibitions</a>
+      <a href="#" id="navInfo">Info</a>
+    </nav>
+  </header>
+
+  <main id="mainScroll">
+    <div class="menu-panel" id="panel-name"></div>
+    <div class="menu-panel" id="panel-exhibitions"></div>
+    <div class="menu-panel" id="panel-info"></div>
+
+    <section class="works" id="worksList" aria-label="Works list">
+      <div class="work-row">
+        <a class="work-item" href="The Breath of Metal.html"
+           data-work-id="metal"
+           data-bg="Home page image/mine.jpg">
+          The Breath of Metal： Baiyin - What the mine left behind, 2025
+        </a>
+        <div class="panel" id="panel-metal"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-3.html"
+           data-work-id="book-metal"
+           data-bg="The Breath of Metal/Diplom Exhibition/_DSC0113.jpg">
+          Book: The Breath of Metal, 2025
+        </a>
+        <div class="panel" id="panel-book-metal"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="No Feeding/Exhibition_Fruchthalle_01.jpg"
+           data-work-id="nofeeding"
+           data-bg="No Feeding/Exhibition_Fruchthalle_02.jpg">
+          No Feeding, 2025
+        </a>
+        <div class="panel" id="panel-nofeeding"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-3.html"
+           data-work-id="butt"
+           data-bg="Home page image/butt.jpg">
+          Butt, 2023
+        </a>
+        <div class="panel" id="panel-butt"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-4.html"
+           data-work-id="house"
+           data-bg="Home page image/tree.jpg">
+          House, 2019
+        </a>
+        <div class="panel" id="panel-house"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-5.html"
+           data-work-id="home"
+           data-bg="Home page image/home.jpg">
+          Home, sweet home, 2019
+        </a>
+        <div class="panel" id="panel-home"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-6.html"
+           data-work-id="exp1"
+           data-bg="Home page image/exp2.jpg">
+          Expirement No.2, 2019
+        </a>
+        <div class="panel" id="panel-exp1"></div>
+      </div>
+
+      <div class="work-row">
+        <a class="work-item" href="work-7.html"
+           data-work-id="exp2"
+           data-bg="Home page image/exp1.jpg">
+          Expirement No.1, 2018
+        </a>
+        <div class="panel" id="panel-exp2"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const bgWrap = document.getElementById("bgWrap");
+    const bgA = document.getElementById("bgA");
+    const bgB = document.getElementById("bgB");
+
+    const workLinks = Array.from(document.querySelectorAll(".work-item"));
+    const worksList = document.getElementById("worksList");
+    const mainScroll = document.getElementById("mainScroll");
+
+    let showingA = true;
+    let currentUrl = "";
+
+    let openWorkId = null;
+    let openMenu = null; // "name" | "info" | "exhibitions" | null
+
+    /* ===== ✅ Lightbox（点击图片放大） ===== */
+    let lightboxEl = null;
+    let lightboxImgEl = null;
+
+    function ensureLightbox(){
+      if (lightboxEl) return;
+
+      lightboxEl = document.createElement("div");
+      lightboxEl.className = "lightbox";
+      lightboxEl.id = "lightbox";
+
+      lightboxEl.innerHTML = `
+        <button class="lightbox__close" type="button" aria-label="Close">Close</button>
+        <img class="lightbox__img" alt="">
+      `;
+
+      document.body.appendChild(lightboxEl);
+
+      lightboxImgEl = lightboxEl.querySelector(".lightbox__img");
+      const closeBtn = lightboxEl.querySelector(".lightbox__close");
+
+      closeBtn.addEventListener("click", closeLightbox);
+
+      // 点击背景关闭（点到图片不关）
+      lightboxEl.addEventListener("click", (e)=>{
+        if (e.target === lightboxEl) closeLightbox();
+      });
+
+      // ESC 关闭
+      document.addEventListener("keydown", (e)=>{
+        if (e.key === "Escape") closeLightbox();
+      });
+    }
+
+    function openLightbox(src){
+      if (!src) return;
+      ensureLightbox();
+      lightboxImgEl.src = src;
+      lightboxEl.classList.add("is-open");
+    }
+
+    function closeLightbox(){
+      if (!lightboxEl) return;
+      lightboxEl.classList.remove("is-open");
+      if (lightboxImgEl) lightboxImgEl.src = "";
+    }
+
+    function bindLightboxImages(panel){
+      const imgs = Array.from(panel.querySelectorAll('img[data-lightbox="1"]'));
+      imgs.forEach(img=>{
+        img.addEventListener("click", (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          openLightbox(img.getAttribute("data-fullsrc") || img.src);
         });
+      });
+    }
 
-        function updateSlider() {
-            slider.style.transform = `translateX(-${currentIndex * 100}vw)`;
-            updateProjectName();
+
+    function anyOpen(){ return !!openWorkId || !!openMenu; }
+
+    function setBg(url){
+      if (anyOpen()) return;
+      if (!url || url === currentUrl) return;
+      currentUrl = url;
+
+      const next = showingA ? bgB : bgA;
+      const prev = showingA ? bgA : bgB;
+
+      next.style.backgroundImage = `url("${url}")`;
+      next.classList.add("is-visible");
+      prev.classList.remove("is-visible");
+
+      showingA = !showingA;
+    }
+
+    function clearBg(){
+      bgA.classList.remove("is-visible");
+      bgB.classList.remove("is-visible");
+      currentUrl = "";
+    }
+
+    function hideBackgroundForReading(){
+      clearBg();
+      bgWrap.classList.add("is-hidden");
+    }
+
+    function updateBackgroundMode(){
+      if (!anyOpen()){
+        bgWrap.classList.remove("is-hidden");
+      } else {
+        bgWrap.classList.add("is-hidden");
+      }
+    }
+
+    workLinks.forEach((el) => {
+      el.addEventListener("mouseenter", () => setBg(el.getAttribute("data-bg")));
+    });
+
+    worksList.addEventListener("mouseleave", () => {
+      if (!anyOpen()) clearBg();
+    });
+
+    /* ===== Works data =====
+       ✅ 3) images 支持两种写法：
+       - 单张一行： "a.jpg"
+       - 两张并列： ["a.jpg","b.jpg"]
+    */
+    const worksData = {
+      metal: {
+        desc: `My artistic practice explores the relationships between metal, mining, and the intertwined histories of family and city. Metal functions in my work both as material and as language, carrying weight, sound, and time, while preserving traces of political and labor processes embedded within it.
+
+I grew up in Baiyin, Gansu Province, China, known as the “Copper City,” an industrial town shaped by mining. Several generations of my family worked in the mines, in smelting, and in ore processing. These personal histories do not appear in my work as nostalgia, but as a structural framework that shapes my understanding of materiality, body, and urban space. In my work, the mine is not merely a geographic site, but an evolving system: from ore to metal, from metal to infrastructure, from infrastructure to city, and eventually to ruin.
+
+Methodologically, I begin with photography, archives, and the material itself. I work on site in mining regions, photograph and collect ores, discarded metals, tools, and industrial remnants, alongside family photographs and historical documents. These materials are recontextualized in the studio under controlled light, where they detach from their original function and become a form of “suspended evidence.”
+
+My practice spans photography, video, sound, and installation. Photography operates as a process of extraction and transformation rather than mere documentation. Video and sound introduce time, breath, vibration, and industrial rhythms. Through layering these media, I investigate how resources shape cities, environments, bodies, and how mining histories persist, even as they gradually disappear into the ground and the archive.`,
+
+        book: [
+          { label: "Book PDF / Preview", href: "The Breath of Metal.html" },
+          { label: "Chapter / Text", href: "The Breath of Metal.html" }
+        ],
+        exhibition: [
+          { label: "Diplom Exhibition", href: "The Breath of Metal.html" }
+        ],
+
+
+         /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+        sections: [
+    {
+      title: "Imprint/ Credits",
+      links: [
+        { label: `Supervisor: Prof. Susanne Krimann, Karoline Sobel  
+
+          Theory Supervisor: Dr. Barbara Kuon, Julia Modes 
+
+          Graphic Design: Jinhyung Hur  
+
+          Exhibition Adviser: Wei Wang, Vera Gärtner  
+
+          Installing Support: Wei Wang, Siting Chen, Simon Schwartz, Qiangian Feng, Zixiao Ge, Qi You, Xu Teng
+
+          Technical Support: Lorenz Schwarz, Tobias Keilbach, Sebastian Schäfer, Yunfei Zhang`, href: "imprint.html" }
+      ]
+    },
+    {
+      title: "Book",
+      links: [
+        { label: "Open Book Page", href: "work-3.html" }
+      ]
+    },
+    {
+      title: "Link to Video",
+      links: [
+        { label: "Klick here to see the Video", href: "https://youtu.be/t8u4irp9XdM" }
+      ]
+    },
+    {
+      title: "Related Exhibitions",
+      links: [
+        { label: `The Breath of Metal, HfG Diplom Exhibition Week, ZKM Pavilion, Karlsruhe, Germany, 2026
+
+          10.04.2026 - 30.04.2026, The Breath of Metal, 26 Gradshow, ZKM, Karlsruhe, Germany, 10.04.2026 - 30.04.2026`, href: "The Breath of Metal.html" }
+      ]
+    }
+  ],
+        
+
+        /* ✅ 示例：你可以自由指定并列行 */
+        images: [
+          "The Breath of Metal/Poster/dakang poster,f.png",
+          "The Breath of Metal/Poster/dakang poster,f2.png",
+          "The Breath of Metal/Diplom Exhibition/_DSC0137.jpg", 
+          "The Breath of Metal/Poster/dakang poster,f3.png",
+          "The Breath of Metal/Diplom Exhibition/_DSC0134.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0029.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0076.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0095.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0027.jpg", 
+          "The Breath of Metal/Diplom Exhibition/_DSC0028.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0001.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0082.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0089.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0090.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0187.jpg", 
+          "The Breath of Metal/Diplom Exhibition/_DSC0052.jpg", 
+          "The Breath of Metal/Diplom Exhibition/_DSC0056.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0062.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0065.jpg", 
+          "The Breath of Metal/Diplom Exhibition/_DSC0067.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0098.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0116.jpg",
+          "The Breath of Metal/Video.png",
+          "The Breath of Metal/Video1.png",
+          "The Breath of Metal/Poster/IMG_1231.JPG",
+          "The Breath of Metal/Poster/IMG_1232.JPG",
+        ]
+      },
+
+      "book-metal": {
+        desc: `Pigeons are among the most ordinary animals in urban life. In cities across Germany, they appear daily in alleyways, on rooftops, in public squares, and along railings. During my research, I even encountered numerous pigeon-related photographs and documents in the Karlsruhe city archive.
+
+Although they inhabit the city alongside us, pigeons are often ignored, despised, or mistreated. They are called “flying vacuum cleaners” for picking up leftovers, or “flying rats” because they are associated with disease. Yet a closer look at their history reveals a different narrative: pigeons once served as reliable messengers, accompanying travel, trade, and colonial expansion. As global mobility increased, so did their worldwide presence. Today, technological progress has rendered them seemingly unnecessary, and our rejection becomes visible in the anti-pigeon spikes fixed to buildings.
+
+In my photographs, I use the pigeon in humorous and absurd ways as a symbol to reflect its complex relationship with humans — and to question my own sense of identity. Sometimes it wears a suit; sometimes it appears isolated and displaced. Is it a human wearing a pigeon mask, or a pigeon attempting to become human?`,
+        book: [{ label: "Open Book Page", href: "work-3.html" }],
+        exhibition: [{ label: "Related Project", href: "The Breath of Metal.html" }],
+        images: ["The Breath of Metal/Diplom Exhibition/_DSC0113.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0128.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0125.jpg",
+          "The Breath of Metal/Diplom Exhibition/_DSC0116.jpg",
+          "The Breath of Metal/Book Screenshot/01.png",
+          "The Breath of Metal/Book Screenshot/02.png",
+          "The Breath of Metal/Book Screenshot/03.png",
+          "The Breath of Metal/Book Screenshot/04.png",
+          "The Breath of Metal/Book Screenshot/05.png"
+        ],
+
+         /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+         sections: [
+    {
+      title: "Imprint/ Credits",
+      links: [
+        { label: `© 2026 Dakang Wang
+
+The Breath of Metal - Baiyin, what the Mine left behind
+
+All rights reserved.
+
+Artist / Author: Dakang Wang
+Book design and layout: Jinhyung Hur
+Editing: Jinhyung Hur
+
+Image Credits
+
+All photographs, artworks, and visual materials are © the author unless otherwise stated.
+Tables and figures reproduced in this book are transcribed verbatim by the author from
+photographs taken at Baiyin Huoyanshan Mineral Park Museum.
+
+Translation Note
+
+Unless otherwise noted, all translations are by the author.
+This publication is part of the graduation project The Breath of Metal - Baiyin, what the
+Mine left behind, completed at Staatliche Hochschule für Gestaltung Karlsruhe (HfG
+Karlsruhe).
+
+Acknowledgements
+
+I would like to thank my supervisor Prof. Susanne Krimann, Karolina Sobel, Dr. Babara Kuon, Julia Modes for their guidance and critical discussions throughout the
+development of this project. I would also like to thank everyone who offered support and assistance in various ways throughout the development of this project.
+
+Printing Details
+
+Printed in Korea
+First edition, 2026
+
+Contact
+
+Dakang Wang
+dakang0804@gmail.com
+dakangwang.com
+
+Jinhyung Hur
+hjhjh8545@gmail.com`, href: "imprint.html" }
+      ]
+    },
+    {
+      title: "Book",
+      links: [
+        { label: "Open Book Page", href: "work-3.html" }
+      ]
+    },
+    {
+      title: "Exhibition",
+      links: [
+        { label: `The Breath of Metal, HfG Diplom Exhibition Week, ZKM Pavilion, Karlsruhe, Germany, 2026
+
+          10.04.2026 - 30.04.2026, The Breath of Metal, 26 Gradshow, ZKM, Karlsruhe, Germany, 10.04.2026 - 30.04.2026`, href: "The Breath of Metal.html" }
+      ]
+    }
+  ],
+      },
+
+
+      nofeeding: {
+        desc: `Pigeons are among the most ordinary animals in urban life. In cities across Germany, they appear daily in alleyways, on rooftops, in public squares, and along railings. During my research, I even encountered numerous pigeon-related photographs and documents in the Karlsruhe city archive.
+
+Although they inhabit the city alongside us, pigeons are often ignored, despised, or mistreated. They are called “flying vacuum cleaners” for picking up leftovers, or “flying rats” because they are associated with disease. Yet a closer look at their history reveals a different narrative: pigeons once served as reliable messengers, accompanying travel, trade, and colonial expansion. As global mobility increased, so did their worldwide presence. Today, technological progress has rendered them seemingly unnecessary, and our rejection becomes visible in the anti-pigeon spikes fixed to buildings.
+
+In my photographs, I use the pigeon in humorous and absurd ways as a symbol to reflect its complex relationship with humans — and to question my own sense of identity. Sometimes it wears a suit; sometimes it appears isolated and displaced. Is it a human wearing a pigeon mask, or a pigeon attempting to become human?`,
+        
+/* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+         sections: [
+    {
+      title: "Imprint / Credits",
+      links: [
+        { label: `Supervisor: Prof. Susanne Krimann, Karoline Sobel
+
+          Cuator: Joanne Rodriguez
+
+          Cuator Assistant: Dakang Wang
+
+          Graphic Design: Jiaxuan He`, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Related Exhibitions",
+      links: [
+        { label: `No Feeding, Art Karlsruhe, Academy Square, Halle 3, Karlsruhe, Germany, 2026
+
+No Feeding, Wasser auf Kiefer - oder- Die Zeit liegt quer, Staedtische Galerie Rastatt, Rastatt, Germany, 2025`, href: "The Breath of Metal.html" }
+      ]
+    }
+  ],     
+book: [{ label: "Book / PDF", href: "#" }],
+        exhibition: [{ label: "Fruchthalle Exhibition", href: "No Feeding/Exhibition_Fruchthalle_01.jpg" }],
+        images: [
+          "No Feeding/Exhibition_Fruchthalle_02.jpg", 
+          "No Feeding/Exhibition_Fruchthalle_01.jpg",
+          "No Feeding/Einladung Hinten.PNG",
+          "No Feeding/Poster.PNG",
+          ["No Feeding/No Feeding A2 JPG/No Feeding_01.jpg", "No Feeding/No Feeding A2 JPG/No Feeding_02.jpg"],
+          ["No Feeding/No Feeding A2 JPG/No Feeding_03.jpg", "No Feeding/No Feeding A2 JPG/No Feeding_04.jpg"],
+          ["No Feeding/No Feeding A2 JPG/No Feeding_05.jpg", "No Feeding/No Feeding A2 JPG/No Feeding_06.jpg"],
+          ["No Feeding/No Feeding A2 JPG/No Feeding_07.jpg", "No Feeding/No Feeding A2 JPG/No Feeding_08.jpg"],
+          ["No Feeding/No Feeding A2 JPG/No Feeding_09.jpg", "No Feeding/No Feeding A2 JPG/No Feeding_10.jpg"],
+        ]
+      },
+
+      butt: {
+        desc: `When I started this project I wanted to start with the most common things around me. Later I found that the cigarette butt on the ground is an good element : when you look closely at it, you wil find
+that each cigarette butt has its own uniqueness, different lengths and shapes, and some are even unrecognizable; the environment around it is also give people a lot of space for imagination. So I try to take photo of each butt as portrait and let themselves tel stories.`,
+
+        /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+  sections: [
+    {
+      title: "Imprint / Credits",
+      links: [
+        { label: `Supervisor: Prof. Fiona Tan
+
+        All Photo by Dakang Wang.`, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Ralated Exhibition",
+      links: [
+        { label: "Butts, HfG Rundgang, HfG Karlsruhe, Karlsruhe, Germany, 2023", href: "The Breath of Metal.html" }
+      ]
+    }
+  ],
+        book: [{ label: "Book / PDF", href: "#" }],
+        exhibition: [{ label: "Exhibition", href: "#" }],
+        images: [
+        "Butt Project/butt7.jpg",
+        "Butt Project/butt6.jpg",
+         "Butt Project/butt2.jpg",
+         "Butt Project/butt3.jpg",
+         "Butt Project/butt4.jpg",
+         "Butt Project/butt5.jpg",
+         "Butt Project/butt8.jpg",
+         "Butt Project/butt1.jpg",
+        ]
+      },
+
+      house: {
+        desc: `In the information age, people are like birds in living cages.
+The living environment created by technology is similar to the forests and cities
+displayed on the screens in the cages.
+Information and technology have brought many conveniences to people, but at
+the same time they have made people tired and disoriented.
+It is like a bird cannot distinguish whether it is in a cage or in a forest. People are
+fooled by the electronic world.
+What you have to do is find your own direction in this world.`,
+  /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+  sections: [
+    {
+      title: "Imprint / Credits",
+      links: [
+        { label: `All Photo by Dakang Wang.`, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Link to Videos of Installation",
+      links: [
+        { label: "Klick here to see the Video", href: "https://www.youtube.com/watch?v=DA4g42pvrWw" }
+      ]
+    }
+  ],
+        book: [{ label: "Book / PDF", href: "#" }],
+        exhibition: [{ label: "Exhibition", href: "#" }],
+        images: ["House/house1.jpg",
+          "House/house2.jpg",
+          "House/house3.jpg",
+          "House/house4.jpg",
+          "House/house5.jpg",
+        ]
+      },
+
+      home: {
+        desc: `Through some behaviors once done at home on the ruins of my hometown, I have some connection in time and space to my former hometown and think about what urbanization has brought us.`,
+       /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+  sections: [
+    {
+      title: "Imprint / Credits",
+      links: [
+        { label: `Performance by Dakang Wang.
+          
+          Shooting by Ziyue Zhang.`, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Link to Videos",
+      links: [
+        { label: "Klick here to see the Performance Video", href: "https://www.youtube.com/watch?v=1RSWj7dDqr4" }
+      ]
+    }
+  ],
+        exhibition: [{ label: "Exhibition", href: "#" }],
+        images: ["Home/home1.jpg",
+          "Home/home2.jpg",
+          "Home/home3.jpg",
+          "Home/home4.jpg",
+          "Home/home5.jpg"
+        ]
+      },
+
+      exp1: {
+        desc: `Benjamin's theory of fables was strongly influenced by the mysticism of Judaism. Inspired by the theory of fables, at the same time I learned about " Singularity Art" and strong artificial intelligence of Tan Liqin, and was inspired by many movies like "Dutsch Boy" in the movie Global Storm. The" Elysium world "in the movie Elysium space actually plays the role of God in the future world.`,
+       /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+  sections: [
+    {
+      title: "Referance Books",
+      links: [
+        { label: ` `, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Related Exhibitions",
+      links: [
+        { label: `Expierment No.2, Graduation Exhibition, Sichuan Fine Arts Institute Art Museum, Chongqing, China, 2019`, href: " " }
+      ]
+    }
+  ],
+        exhibition: [{ label: "Exhibition", href: "#" }],
+        images: ["Experiment2/exp1.jpg",
+          "Experiment2/exp2.jpg",
+          "Experiment2/exp4.jpg",
+          "Experiment2/exp3.jpg",
+          "Experiment2/exp5.jpg",
+          "Experiment2/exp6.jpg"
+        ]
+      },
+
+      exp2: {
+        desc: "From my interest in the mysterious religion and history of horror films， therefore I began to learn some knowledge of the mysticism of Judaism. Being surprised that there are many similarities between the Kabbalistic mystical practice of Judaism and some of my ideas, I studied Martin Buber's ON JUDAISM and G.G.Scholem's MAJOR TRENDS IN JEWISH MYSTICISM. Although I don't believe in God, I think I can definitely draw inspiration from them. I think the method of mysticism is a way to discover ourselves. Maybe mysticism also leads us to open a path deep into our hearts and let ourselves know.",
+       /* ✅ Imprint, Books, Exhibitions展开选项在这里编辑 */
+  sections: [
+    {
+      title: "Referance Books",
+      links: [
+        { label: `Martin Buber's ON JUDAISM
+        
+        G.G.Scholem's MAJOR TRENDS IN JEWISH MYSTICISM`, href: "imprint.html" }
+      ]
+    },
+    
+    {
+      title: "Related Exhibitions",
+      links: [
+        { label: `Expierment No.1, Sichuan Fine Arts Institute Art Museum, Chongqing, China, 2018`, href: " " }
+      ]
+    }
+  ],
+        exhibition: [{ label: "Exhibition", href: "#" }],
+        images: ["Experiment1/exp1.jpg",
+          "Experiment1/exp2.jpg",
+          "Experiment1/exp4.jpg",
+          "Experiment1/exp3.jpg",
+          "Experiment1/exp5.jpg"
+        ]
+      }
+    };
+
+    function renderGallery(images){
+      return (images || []).map(item => {
+        if (Array.isArray(item)){
+          const a = item[0] || "";
+          const b = item[1] || "";
+          return `
+            <div class="gallery-row two">
+              ${a ? `<img src="${a}" alt="">` : ""}
+              ${b ? `<img src="${b}" alt="">` : ""}
+            </div>
+          `;
         }
+        return `
+          <div class="gallery-row one">
+            <img src="${item}" alt="">
+          </div>
+        `;
+      }).join("");
+    }
 
-        function updateProjectName() {
-            let currentSlide = slides[currentIndex];
-            projectName.textContent = `"${currentSlide.getAttribute('data-name')}"`;
-            projectName.setAttribute('data-link', currentSlide.getAttribute('data-link'));
+    function getWorkSections(work){
+      // ✅ per-work editable sections:
+      // work.sections = [{ title: "Book/Imprint/...", links: [{label, href}, ...] }, ...]
+      // Backward compatible: if sections is missing, it will use work.book + work.exhibition.
+      if (Array.isArray(work.sections) && work.sections.length) return work.sections;
+
+      const sections = [];
+      if (Array.isArray(work.book) && work.book.length){
+        sections.push({ title: "Book", links: work.book });
+      }
+      if (Array.isArray(work.exhibition) && work.exhibition.length){
+        sections.push({ title: "Exhibition", links: work.exhibition });
+      }
+      return sections;
+    }
+
+    /* ====== ✅ Works images: 双列拆分 + 渲染（每列独立滚动） ====== */
+    function splitImagesForColumns(images){
+      const left = [];
+      const right = [];
+      let toggle = 0;
+
+      (images || []).forEach(item=>{
+        if (Array.isArray(item)){
+          const a = item[0];
+          const b = item[1];
+          if (a) left.push(a);
+          if (b) right.push(b);
+          return;
         }
+        if (!item) return;
+        if (toggle % 2 === 0) left.push(item);
+        else right.push(item);
+        toggle += 1;
+      });
 
-        function nextSlide() {
-            if (currentIndex < slides.length - 1) {
-                currentIndex++;
-                updateSlider();
-            }
-        }
+      return { left, right };
+    }
 
-        function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlider();
-            }
-        }
+    function renderGalleryColumn(list){
+      return (list || []).map(src => `
+        <img class="zoomable" src="${src}" data-lightbox="1" data-fullsrc="${src}" alt="">
+      `).join("");
+    }
 
-        slides.forEach(slide => {
-            slide.addEventListener('click', function() {
-                let link = slide.getAttribute('data-link');
-                if (link) window.location.href = link;
-            });
+    function renderGallerySplit(images){
+      const cols = splitImagesForColumns(images);
+      return `
+        <div class="gallery-split">
+          <div class="gallery-col">${renderGalleryColumn(cols.left)}</div>
+          <div class="gallery-col">${renderGalleryColumn(cols.right)}</div>
+        </div>
+      `;
+    }
+
+    /* ====== ✅ Exhibitions posters: 双列独立滚动（菜单区） ====== */
+    function renderExPosterSplit(images){
+      const cols = splitImagesForColumns(images);
+      return `
+        <div class="ex-posters-wrap">
+          <div class="ex-posters">
+            <div class="ex-poster-col">${renderGalleryColumn(cols.left)}</div>
+            <div class="ex-poster-col">${renderGalleryColumn(cols.right)}</div>
+          </div>
+          <div class="ex-fog" aria-hidden="true"></div>
+        </div>
+      `;
+    }
+
+    function buildWorkPanelHTML(work){
+      const sections = getWorkSections(work);
+
+      const sectionsHTML = (sections || []).map(section => {
+        const linksHTML = (section.links || [])
+          .map(x => {
+            const title = (section.title || "").toLowerCase();
+            const noRed = section.noHover === true || section.type === "static" || title.includes("imprint");
+            const cls = noRed ? "no-red" : "";
+            return `<a class="${cls}" href="${x.href}">${x.label}</a>`;
+          })
+          .join("");
+
+        return `
+          <details>
+            <summary>${section.title || ""}</summary>
+            <div class="subcontent">${linksHTML}</div>
+          </details>
+        `;
+      }).join("");
+
+      return `
+        <div class="panel-inner">
+          <div>
+            <p class="detail-desc">${work.desc || ""}</p>
+            ${sectionsHTML}
+          </div>
+
+          <div>
+            ${renderGallerySplit(work.images)}
+          </div>
+        </div>
+      `;
+    }
+
+    /* ===== ✅ 1) 修复展开 bug：自动高度（图片/折叠变化都会更新） ===== */
+
+    function openWithAutoHeight(panel){
+      panel.classList.add("is-open");
+      panel.style.maxHeight = "0px";
+
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      });
+
+      // 动画结束后解除 max-height 限制（后续增长不裁切）
+      const onEnd = (e)=>{
+        if (e.propertyName !== "max-height") return;
+        panel.removeEventListener("transitionend", onEnd);
+        panel.style.maxHeight = "none";
+      };
+      panel.addEventListener("transitionend", onEnd);
+    }
+
+    function bumpHeight(panel){
+      // 如果已经解除限制，就不需要 bump
+      if (panel.style.maxHeight === "none") return;
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+    function bindDetailsHeightUpdates(panel){
+      const detailsEls = Array.from(panel.querySelectorAll("details"));
+      detailsEls.forEach(d=>{
+        d.addEventListener("toggle", ()=>{
+          // toggle 后下一帧再读高度更稳
+          requestAnimationFrame(()=> bumpHeight(panel));
+          requestAnimationFrame(()=> requestAnimationFrame(()=> bumpHeight(panel)));
         });
+      });
+    }
 
-        projectName.addEventListener('click', function() {
-            let link = projectName.getAttribute('data-link');
-            if (link) window.location.href = link;
+    function waitImages(panel){
+      const imgs = Array.from(panel.querySelectorAll("img"));
+      if (!imgs.length) return Promise.resolve();
+
+      return Promise.all(imgs.map(img=>{
+        if (img.complete && img.naturalWidth) return Promise.resolve();
+        return new Promise(res=>{
+          img.addEventListener("load", res, { once:true });
+          img.addEventListener("error", res, { once:true });
         });
-    </script>
-    <div class="contact">
-        <a href="mailto:dakang0804@gmail.com" class="contact-link">Email</a>
-        <a href="https://www.instagram.com/dakang0804" target="_blank" class="contact-link">Instagram</a>
-        <a href="about1.html" class="contact-link">About me</a>
-    </div>
+      }));
+    }
 
-    <div class="navigation">
-        <button class="nav-button left" onclick="prevSlide()">⟨</button>
-        <button class="nav-button right" onclick="nextSlide()">⟩</button>
-    </div>
+    async function openWorkPanel(id){
+      const panel = document.getElementById(`panel-${id}`);
+      const data = worksData[id];
+      if (!panel || !data) return;
+
+      hideBackgroundForReading();
+
+      panel.innerHTML = buildWorkPanelHTML(data);
+
+      // Book/Exhibition 打开/关闭时也更新高度
+      bindDetailsHeightUpdates(panel);
+
+      // 点击图片放大
+      bindLightboxImages(panel);
+
+      // 先展开
+      openWithAutoHeight(panel);
+
+      // 图片加载过程中：每加载一张 bump 一次（关键：修复“要点两次”）
+      const imgs = Array.from(panel.querySelectorAll("img"));
+      imgs.forEach(img=>{
+        if (img.complete && img.naturalWidth) return;
+        img.addEventListener("load", ()=> bumpHeight(panel), { once:true });
+        img.addEventListener("error", ()=> bumpHeight(panel), { once:true });
+      });
+
+      // 全部加载完再 bump 一次（保险）
+      await waitImages(panel);
+      bumpHeight(panel);
+    }
+
+    function closeWorkPanel(id){
+      const panel = document.getElementById(`panel-${id}`);
+      if (!panel) return;
+
+      // 如果是 none，先锁定当前高度，才能收起动画
+      if (panel.style.maxHeight === "none"){
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+
+      requestAnimationFrame(()=>{
+        panel.style.maxHeight = "0px";
+        panel.classList.remove("is-open");
+      });
+
+      panel.addEventListener("transitionend", function handler(e){
+        if (e.propertyName === "max-height" && panel.style.maxHeight === "0px"){
+          panel.removeEventListener("transitionend", handler);
+          if (openWorkId === id) openWorkId = null;
+          updateBackgroundMode();
+        }
+      });
+    }
+
+    /* ===== Menu data（保持你原来的） ===== */
+    const menuData = {
+      name: {
+        artistStatement:
+`My artistic practice spans photography, moving image, instalation, sound, and material experimentation. I examine how images, matter, and space are produced, circulated, and reorganized within systems of technology, labor, infrastructure, and everyday life. Through translation between different media, I explore how seemingly neutral environments and technical structures continuously shape individual experience, social position, and the formation of identity.
+
+In my work, I do not approach art as a representation of reality, but as an operative intervention into existing structures. Industrial sites, urban spaces, non-human subjects, archival images, and everyday objects are not treated as symbols, but as components within larger systems, repositioned within relations of viewing, perception, and understanding. Through photographic extraction, spatial organization, material transformation, and the use of sound, I aim to expose operational mechanisms that are often overlooked, yet fundamentaly shape our lived environments.
+
+Overal, my practice takes the form of an ongoing, research-based process. Through a cross-media approach, I place personal experience, social structures, and material conditions within a shared network of relations, exploring how images function not only as objects of observation, but as active agents in the production of reality and identity.`,
+        education: [
+          { time: "10.2020 - 03.2026", text: "Media Arts, Staatliche Hochschule für Gestaltung Karlsruhe, Germany" },
+          { time: "09.2015 - 09.2019", text: "Bachelor of Fine Arts, Sichuan Fine Arts Institute, China" },
+          { time: "03.2018 - 09.2018", text: "Exchange Student, Hochschule für Gestaltung Offenbach, Germany" }
+        ],
+        images: ["Dakang Wang/IMG_7862.jpg"]
+      },
+
+      info: {
+        title: "Info",
+        contact: {
+          email: "dakang0804@gmail.com",
+          phone: "+49 (0)17627967662",
+          instagram: "https://instagram.com/dakang0804"
+        }
+      },
+
+      exhibitions: {
+        title: "Exhibitions",
+        posters: [
+          // ✅ posters here (image paths)
+          "The Breath of Metal/Poster/IMG_1231.JPG",
+          "No Feeding/Poster.PNG",
+          "The Breath of Metal/Poster/IMG_1232.JPG",
+          "No Feeding/Einladung Hinten.PNG",
+          "The Breath of Metal/Poster/dakang poster,f.png",
+          "The Breath of Metal/Poster/dakang poster,f2.png",
+          "The Breath of Metal/Poster/dakang poster,f3.png",
+        ],
+        items: [
+          { date: "Upcoming Exhibitions", text: " " },
+          { date: "10.04.2026 - 30.04.2026", text: "The Breath of Metal, 26 Gradshow, ZKM, Karlsruhe, Germany" },
+          { date: " ", text: " " },
+          { date: "Past Exhibitions", text: " " },
+          { date: "2026", text: "No Feeding, Art Karlsruhe, Academy Square, Halle 3, Karlsruhe, Germany" },
+          { date: "2026", text: "The Breath of Metal, HfG Diplom Exhibition Week, ZKM Pavilion, Karlsruhe, Germany" },
+          { date: "2025", text: "No Feeding, Wasser auf Kiefer - oder- Die Zeit liegt quer, Staedtische Galerie Rastatt, Rastatt, Germany" },
+          { date: "2023", text: "Butts, HfG Rundgang, HfG Karlsruhe, Karlsruhe, Germany" },
+          { date: "2023", text: "Growing with the Mine, Mining Photography, HfG Karlsruhe, Karlsruhe, Germany" },
+          { date: "2022", text: "The Match, Lobby, Staedtische Galerie Karlsruhe, Karlsruhe, Germany" },
+          { date: "2021", text: "Sukiyaki, HfG Rundgang, HfG Karlsruhe, Karlsruhe, Germany" },
+          { date: "2019", text: "Expierment No.2, Graduation Exhibition, Sichuan Fine Arts Institute Art Museum, Chongqing, China" },
+          { date: "2021", text: "Sukiyaki, HfG Rundgang, HfG Karlsruhe, Karlsruhe, Germany" },
+          { date: "2018", text: "Expierment No.1, Sichuan Fine Arts Institute Art Museum, Chongqing, China" }
+        ]
+      }
+    };
+
+    function buildMenuPanelHTML(key){
+      const data = menuData[key];
+      if (!data) return "";
+
+      
+      if (key === "exhibitions"){
+        const rows = (data.items || []).map(it => `
+          <div class="ex-item">
+            <div class="ex-date">${it.date || ""}</div>
+            <div class="ex-body">${it.text || ""}</div>
+          </div>
+        `).join("");
+
+        const postersHTML = renderExPosterSplit(data.posters || []);
+
+        return `
+          <div class="menu-panel-inner one-col">
+            <div class="ex-split">
+              <div class="ex-left">
+                <h2 class="menu-title">${data.title}</h2>
+                <div class="ex-list">${rows}</div>
+              </div>
+
+              <div>
+                ${postersHTML}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+
+      if (key === "info"){
+        return `
+          <div class="menu-panel-inner">
+            <div>
+              <h2 class="menu-title">${data.title}</h2>
+
+              <div class="menu-subtitle menu-subtitle--first">Contact</div>
+              <div class="menu-links">
+                <a class="is-underlined" href="${data.contact.instagram}" target="_blank" rel="noreferrer">Instagram</a>
+                <a class="is-underlined" href="mailto:${data.contact.email}">${data.contact.email}</a>
+                <a href="tel:${data.contact.phone.replace(/\\s|\$begin:math:text$\|\\$end:math:text$|-/g,'')}">${data.contact.phone}</a>
+              </div>
+
+              <div class="rights">© All Rights reserved by Dakang Wang.</div>
+            </div>
+            <div></div>
+          </div>
+        `;
+      }
+
+      const eduBlocks = (data.education || []).map(e => `
+        <div class="menu-block">
+          <div class="menu-time">${e.time || ""}</div>
+          <p>${e.text || ""}</p>
+        </div>
+      `).join("");
+
+      const imgs = (data.images || []).map(src => `<div class="gallery-row one"><img src="${src}" alt=""></div>`).join("");
+
+      return `
+        <div class="menu-panel-inner">
+          <div>
+            <div class="menu-subtitle menu-subtitle--first">Education</div>
+            ${eduBlocks}
+
+            <div class="menu-subtitle">Artist Statement</div>
+            <p class="menu-text">${data.artistStatement || ""}</p>
+          </div>
+
+          <div>
+            <div class="gallery">${imgs}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    
+    /* ====== ✅ Exhibitions: posters height sync (match left text height) ====== */
+    function syncExPosterHeight(panelEl){
+      if (!panelEl) return;
+
+      const left = panelEl.querySelector(".ex-left");
+      const list = panelEl.querySelector(".ex-left .ex-list");
+      const wrap = panelEl.querySelector(".ex-posters-wrap");
+      const cols = Array.from(panelEl.querySelectorAll(".ex-poster-col"));
+
+      if (!left || !list || !wrap || !cols.length) return;
+
+      const listRect = list.getBoundingClientRect();
+      const wrapRect = wrap.getBoundingClientRect();
+
+      // ✅ Visible bottom should match the last line of the exhibition text
+      //     (wrap is pulled up behind the fixed header via CSS margin-top)
+      const h = Math.max(0, Math.round(listRect.bottom - wrapRect.top));
+      cols.forEach(col=>{
+        col.style.maxHeight = h ? (h + "px") : "";
+      });
+    }
+
+    function bindExPosterResize(panelEl){
+      if (!panelEl) return;
+
+      // Clean old observer if any
+      if (panelEl._exRO){
+        try{ panelEl._exRO.disconnect(); }catch(e){}
+        panelEl._exRO = null;
+      }
+      if (typeof ResizeObserver === "undefined") return;
+
+      const left = panelEl.querySelector(".ex-left");
+      const list = panelEl.querySelector(".ex-left .ex-list");
+      if (!left || !list) return;
+
+      const ro = new ResizeObserver(()=> syncExPosterHeight(panelEl));
+      ro.observe(left);
+      ro.observe(list);
+      panelEl._exRO = ro;
+    }
+function getMenuPanelEl(key){
+      if (!key) return null;
+      return document.getElementById(`panel-${key}`);
+    }
+
+    function openMenuPanel(key){
+      const el = getMenuPanelEl(key);
+      if (!el) return;
+
+      hideBackgroundForReading();
+
+      el.innerHTML = buildMenuPanelHTML(key);
+
+      // ✅ Exhibitions: posters + lightbox
+      if (key === "exhibitions"){
+        // posters columns height = left text height
+        syncExPosterHeight(el);
+        bindExPosterResize(el);
+        // clickable posters
+        bindLightboxImages(el);
+      }
+
+      // ✅ 菜单面板也用自动高度（修复第一次打开图片不完整）
+      openWithAutoHeight(el);
+
+      // 图片加载过程中：每加载一张 bump 一次
+      const imgs = Array.from(el.querySelectorAll("img"));
+      imgs.forEach(img=>{
+        if (img.complete && img.naturalWidth) return;
+        img.addEventListener("load", ()=> { if (key === "exhibitions") syncExPosterHeight(el); bumpHeight(el); }, { once:true });
+        img.addEventListener("error", ()=> { if (key === "exhibitions") syncExPosterHeight(el); bumpHeight(el); }, { once:true });
+      });
+
+      // 全部加载完再 bump 一次（保险）
+      waitImages(el).then(()=> { if (key === "exhibitions") syncExPosterHeight(el); bumpHeight(el); });
+    }
+
+    function closeMenuPanel(key){
+      const el = getMenuPanelEl(key);
+      if (!el) return;
+
+      // ✅ cleanup exhibitions ResizeObserver
+      if (key === "exhibitions" && el._exRO){
+        try{ el._exRO.disconnect(); }catch(e){}
+        el._exRO = null;
+      }
+
+      // 如果是 none，先锁定当前高度，才能收起动画
+      if (el.style.maxHeight === "none"){
+        el.style.maxHeight = el.scrollHeight + "px";
+      } else {
+        el.style.maxHeight = el.scrollHeight + "px";
+      }
+
+      requestAnimationFrame(()=>{
+        el.style.maxHeight = "0px";
+        el.classList.remove("is-open");
+      });
+
+      el.addEventListener("transitionend", function handler(e){
+        if (e.propertyName === "max-height" && el.style.maxHeight === "0px"){
+          el.removeEventListener("transitionend", handler);
+          updateBackgroundMode();
+        }
+      });
+    }
+
+    /* 只能同时展开一项：打开新的前，先关掉当前菜单 + 当前作品 */
+    function closeAll(explicitAlsoCloseWorks = true){
+      if (openMenu){
+        const k = openMenu;
+        openMenu = null;
+        closeMenuPanel(k);
+      }
+      if (explicitAlsoCloseWorks && openWorkId){
+        const w = openWorkId;
+        openWorkId = null;
+        closeWorkPanel(w);
+      }
+    }
+
+    function toggleMenu(key){
+      document.body.classList.remove("works-tight");
+
+      if (openMenu === key){
+        const k = openMenu;
+        openMenu = null;
+        closeMenuPanel(k);
+        return;
+      }
+
+      closeAll(true);
+
+      openMenu = key;
+      openMenuPanel(key);
+
+      mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ===== header actions ===== */
+    const navName = document.getElementById("navName");
+    const navWorks = document.getElementById("navWorks");
+    const navInfo = document.getElementById("navInfo");
+    const navExhibitions = document.getElementById("navExhibitions");
+
+    navName.addEventListener("click", (e)=>{ e.preventDefault(); toggleMenu("name"); });
+    navInfo.addEventListener("click", (e)=>{ e.preventDefault(); toggleMenu("info"); });
+    navExhibitions.addEventListener("click", (e)=>{ e.preventDefault(); toggleMenu("exhibitions"); });
+
+    navWorks.addEventListener("click", (e)=>{
+      e.preventDefault();
+
+      closeAll(true);
+
+      bgWrap.classList.remove("is-hidden");
+      clearBg();
+
+      mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+
+      document.body.classList.remove("works-tight");
+      void document.body.offsetWidth;
+      document.body.classList.add("works-tight");
+    });
+
+    /* ===== work click: expand/collapse ===== */
+    workLinks.forEach(el=>{
+      el.addEventListener("click", async (e)=>{
+        const id = el.getAttribute("data-work-id");
+        if (!id) return;
+
+        if (e.metaKey || e.ctrlKey || e.button === 1) return;
+        e.preventDefault();
+
+        if (openMenu){
+          const k = openMenu;
+          openMenu = null;
+          closeMenuPanel(k);
+        }
+
+        if (openWorkId === id){
+          const w = openWorkId;
+          openWorkId = null;
+          closeWorkPanel(w);
+          return;
+        }
+
+        if (openWorkId){
+          const w = openWorkId;
+          openWorkId = null;
+          closeWorkPanel(w);
+        }
+
+        openWorkId = id;
+        await openWorkPanel(id);
+
+        el.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+  </script>
 </body>
 </html>
