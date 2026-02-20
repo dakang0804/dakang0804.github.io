@@ -540,37 +540,83 @@
       .ex-poster-col{ max-height: none; overflow: visible; padding-right: 0; }
 
     }
-  
-  
-/* ===== Mobile fixes: keep image order + full posters ===== */
-@media (max-width: 600px){
-  /* Works images: always single column (order = name order) */
-  .gallery-split{ display:block; }
-  .gallery-col{ display: contents; }
-  .gallery-col img{ width:100%; height:auto; display:block; }
 
-  /* Exhibitions: posters should not be clipped */
-  .ex-split{ grid-template-columns: 1fr; }
-  .ex-posters-wrap{
-    margin-top: 0;
-    padding-top: 0;
+    /* ===== Mobile tune (phone) ===== */
+@media (max-width: 600px){
+  :root{
+    /* 字号整体缩小 */
+    --nav-size: 18px;
+    --work-size: 34px;            /* Works 列表标题 */
+    --menu-title-size: 28px;      /* Info/Exhibitions 标题 */
+    --detail-body-size: 13.5px;
+
+    /* 副标题/日期也缩小 */
+    --menu-subtitle-size: 15px;
+    --ex-date-size: 15px;
+
+    /* 间距更紧凑 */
+    --nav-pad-x: 14px;
+    --nav-pad-y: 12px;
+    --list-pad-x: 14px;
+    --list-pad-top: 14px;
+    --panel-gap: 18px;
+    --img-gap: 10px;
+
+    /* header 占用更小 */
+    --header-offset: 62px;
+    --works-nudge-up: 10px;
   }
-  .ex-posters{
-    grid-template-columns: 1fr;
+
+  /* header 在手机上换行，避免挤在一行 */
+  header{
+    flex-wrap: wrap;
+    row-gap: 10px;
+    align-items: flex-start;
   }
-  .ex-poster-col{
-    max-height: none !important;
-    overflow: visible !important;
-    padding-right: 0;
+
+  /* 右侧导航更紧凑，允许换行 */
+  .nav{
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
-  .ex-posters img{
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
+
+  /* Works 行距略放松但不拥挤 */
+  .work-item{
+    line-height: 1.12;
+    letter-spacing: 0.2px;
+  }
+
+  /* 正文可读但不占空间 */
+  .menu-text,
+  .detail-desc,
+  .ex-body,
+  .menu-block p{
+    line-height: 1.65;
+  }
+
+  /* 折叠项（Book / Exhibition / Imprint）触控更舒服 */
+  summary{
+    padding: 10px 0;
+  }
+
+  /* Lightbox 按钮也缩小一点 */
+  .lightbox__close{
+    font-size: var(--nav-size);
   }
 }
-</style>
+
+/* 超小屏（比如 iPhone SE）再压一点 */
+@media (max-width: 380px){
+  :root{
+    --work-size: 30px;
+    --nav-size: 17px;
+    --menu-title-size: 26px;
+    --detail-body-size: 13px;
+  }
+}
+  
+  </style>
 </head>
 
 <body>
@@ -1247,22 +1293,6 @@ What you have to do is find your own direction in this world.`,
     }
 
     function renderGallerySplit(images){
-      const isPhone = window.matchMedia && window.matchMedia("(max-width: 600px)").matches;
-
-      // ✅ Phone: keep DOM order (no two independent columns)
-      if (isPhone){
-        return `
-          <div class="gallery">
-            ${(images || []).map(src => `
-              <div class="gallery-row one">
-                <img class="zoomable" src="${src}" data-lightbox="1" data-fullsrc="${src}" alt="">
-              </div>
-            `).join("")}
-          </div>
-        `;
-      }
-
-      // ✅ Desktop / tablet: two independent columns
       const cols = splitImagesForColumns(images);
       return `
         <div class="gallery-split">
@@ -1618,19 +1648,12 @@ function getMenuPanelEl(key){
 
       // ✅ Exhibitions: posters + lightbox
       if (key === "exhibitions"){
-        const isPhone = window.matchMedia && window.matchMedia("(max-width: 600px)").matches;
-
-        // Phone: let posters expand naturally (no forced max-height syncing)
-        if (!isPhone){
-          // posters columns height = left text height
-          syncExPosterHeight(el);
-          bindExPosterResize(el);
-        }
-
+        // posters columns height = left text height
+        syncExPosterHeight(el);
+        bindExPosterResize(el);
         // clickable posters
         bindLightboxImages(el);
       }
-
 
       // ✅ 菜单面板也用自动高度（修复第一次打开图片不完整）
       openWithAutoHeight(el);
