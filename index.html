@@ -540,6 +540,81 @@
       .ex-poster-col{ max-height: none; overflow: visible; padding-right: 0; }
 
     }
+
+    /* ===== Mobile tune (phone) ===== */
+@media (max-width: 600px){
+  :root{
+    /* 字号整体缩小 */
+    --nav-size: 18px;
+    --work-size: 34px;            /* Works 列表标题 */
+    --menu-title-size: 28px;      /* Info/Exhibitions 标题 */
+    --detail-body-size: 13.5px;
+
+    /* 副标题/日期也缩小 */
+    --menu-subtitle-size: 15px;
+    --ex-date-size: 15px;
+
+    /* 间距更紧凑 */
+    --nav-pad-x: 14px;
+    --nav-pad-y: 12px;
+    --list-pad-x: 14px;
+    --list-pad-top: 14px;
+    --panel-gap: 18px;
+    --img-gap: 10px;
+
+    /* header 占用更小 */
+    --header-offset: 62px;
+    --works-nudge-up: 10px;
+  }
+
+  /* header 在手机上换行，避免挤在一行 */
+  header{
+    flex-wrap: wrap;
+    row-gap: 10px;
+    align-items: flex-start;
+  }
+
+  /* 右侧导航更紧凑，允许换行 */
+  .nav{
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  /* Works 行距略放松但不拥挤 */
+  .work-item{
+    line-height: 1.12;
+    letter-spacing: 0.2px;
+  }
+
+  /* 正文可读但不占空间 */
+  .menu-text,
+  .detail-desc,
+  .ex-body,
+  .menu-block p{
+    line-height: 1.65;
+  }
+
+  /* 折叠项（Book / Exhibition / Imprint）触控更舒服 */
+  summary{
+    padding: 10px 0;
+  }
+
+  /* Lightbox 按钮也缩小一点 */
+  .lightbox__close{
+    font-size: var(--nav-size);
+  }
+}
+
+/* 超小屏（比如 iPhone SE）再压一点 */
+@media (max-width: 380px){
+  :root{
+    --work-size: 30px;
+    --nav-size: 17px;
+    --menu-title-size: 26px;
+    --detail-body-size: 13px;
+  }
+}
   
   </style>
 </head>
